@@ -6,11 +6,12 @@ import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 
+import java.awt.*;
+import java.net.URI;
+
 public class MainController extends Controller {
 
-    Button home;
-    Button settings;
-    Button statistics;
+    Button home, settings, statistics;
     Text version;
 
     @Override
@@ -18,17 +19,18 @@ public class MainController extends Controller {
         this.home = ((Button) root.lookup("#btnHome"));
         this.settings = ((Button) root.lookup("#btnSettings"));
         this.statistics = ((Button) root.lookup("#btnStatistics"));
+
         this.version = ((Text) root.lookup("#version"));
 
-        this.home.setOnAction(event -> {
+        this.home.setOnMouseClicked(event -> {
             MainScene.setCurrenViewPage(MainScene.Page.HOME);
         });
 
-        this.settings.setOnAction(event -> {
+        this.settings.setOnMouseClicked(event -> {
             MainScene.setCurrenViewPage(MainScene.Page.SETTINGS);
         });
 
-        this.statistics.setOnAction(event -> {
+        this.statistics.setOnMouseClicked(event -> {
             MainScene.setCurrenViewPage(MainScene.Page.STATISTICS);
         });
 

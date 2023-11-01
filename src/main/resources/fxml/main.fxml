@@ -86,7 +86,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="44.0" />
                </VBox.margin>
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

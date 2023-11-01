@@ -10,23 +10,14 @@
 <?import javafx.scene.text.TextFlow?>
 
 
-<AnchorPane prefHeight="382.0" prefWidth="618.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="382.0" prefWidth="618.0" styleClass="background" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="382.0" prefWidth="304.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
          <children>
-            <TextArea fx:id="changelog" editable="false" layoutX="12.0" layoutY="44.0" prefHeight="339.0" prefWidth="279.0" style="-fx-background-color: transparent;" wrapText="true" />
+            <TextArea fx:id="changelog" editable="false" layoutX="12.0" layoutY="59.0" prefHeight="324.0" prefWidth="279.0" style="-fx-background-color: transparent;" wrapText="true" />
          </children>
       </Pane>
-      <Button fx:id="launchButton" layoutX="324.0" layoutY="324.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="294.0" stylesheets="@../css/buttons.css" text="Launch" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-         <styleClass>
-            <String fx:value="navButton" />
-            <String fx:value="launchButton" />
-         </styleClass>
-      </Button>
-      <TextFlow layoutX="330.0" layoutY="301.0" prefHeight="16.0" prefWidth="288.0" textAlignment="CENTER">
+      <TextFlow layoutX="330.0" layoutY="220.0" prefHeight="16.0" prefWidth="288.0" textAlignment="CENTER">
          <children>
             <Text fill="#dddddd" strokeType="OUTSIDE" strokeWidth="0.0" text="Latest version: " />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
@@ -38,5 +29,14 @@
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
+      <Button fx:id="launchButton" layoutX="327.0" layoutY="162.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="294.0" stylesheets="@../css/buttons.css" text="Launch" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <styleClass>
+            <String fx:value="navButton" />
+            <String fx:value="launchButton" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>
