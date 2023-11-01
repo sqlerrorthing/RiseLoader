@@ -23,7 +23,7 @@ public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
     public static final Version version = new Version("1.0.0");
-    public static final String serverIp = "http://localhost:55503";
+    public static final String serverIp = "http://riseloader.0x22.xyz";
 
     @Override
     public void start(Stage stage) throws IOException {
