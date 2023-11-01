@@ -1,0 +1,55 @@
+.navButton
+{
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+}
+
+.navButton:hover
+{
+    -fx-background-color: linear-gradient(to top left, rgba(225, 149, 135, 0.5), rgba(231, 121, 170, 0.5))
+}
+
+.navButtonActive
+{
+    -fx-background-color:  linear-gradient(to top left, #e19587, #e779aa) !important;
+}
+
+
+.closeButton
+{
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-text-fill: white;
+    -fx-background-radius: 0 6 0 0;
+    -fx-opacity: 0.7;
+}
+
+.closeButton:hover
+{
+    -fx-background-color: rgba(238, 54, 54, 0.62);
+    -fx-opacity: 1;
+}
+
+.minimizeButton
+{
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+    -fx-text-fill: white;
+    -fx-background-radius: 0 0 0 6;
+    -fx-opacity: 0.7;
+}
+
+.minimizeButton:hover
+{
+    -fx-background-color: rgba(238, 180, 54, 0.62);
+    -fx-opacity: 1;
+}
+
+.launchButton
+{
+    -fx-background-color: #b745ef;
+}
+
+.launchButton:hover
+{
+    -fx-background-color: #9e3bce;
+}

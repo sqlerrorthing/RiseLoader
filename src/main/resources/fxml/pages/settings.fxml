@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="382.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@../css/main.css" />
+      <URL value="@../css/buttons.css" />
+      <URL value="@../css/settings.css" />
+   </stylesheets>
+   <children>
+      <Pane layoutX="128.0" layoutY="76.0" prefHeight="231.0" prefWidth="362.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETTINGS">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allocated Memory" wrappingWidth="127.396484375">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#ffffff99" layoutX="14.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much memory should we allocate to the game instance" wrappingWidth="344.396484375" />
+            <Slider fx:id="memorySlider" layoutX="14.0" layoutY="96.0" majorTickUnit="999999.0" max="16000.0" min="500.0" minorTickCount="0" prefHeight="37.0" prefWidth="265.0" />
+            <Pane layoutX="289.0" layoutY="100.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+               <children>
+                  <Label fx:id="memorySelected" alignment="CENTER" layoutX="7.0" layoutY="5.0" prefHeight="17.0" prefWidth="43.0" text="0" textFill="WHITE" />
+               </children>
+            </Pane>
+            <Label fx:id="memorySelected111" alignment="CENTER" layoutX="267.0" layoutY="183.0" prefHeight="17.0" prefWidth="25.0" text="X" textFill="WHITE" />
+            <Text fill="WHITE" layoutX="14.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Resolution" wrappingWidth="127.396484375">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="#ffffff99" layoutX="14.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set the resolution of the game instance" wrappingWidth="344.396484375" />
+            <CheckBox fx:id="fullscreen" layoutX="14.0" layoutY="183.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Launch in Fullscreen?" textFill="#cdcbcb">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </CheckBox>
+            <Pane layoutX="211.0" layoutY="177.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+               <children>
+                  <TextField fx:id="screenWidth" alignment="CENTER" layoutY="3.0" prefHeight="25.0" prefWidth="59.0" />
+               </children>
+            </Pane>
+            <Pane layoutX="289.0" layoutY="177.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+               <children>
+                  <TextField fx:id="screenHeight" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="59.0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

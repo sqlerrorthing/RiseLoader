@@ -1,0 +1,63 @@
+.text
+{
+    -fx-text-fill: white;
+}
+
+.background
+{
+    -fx-background-color: linear-gradient(to top left, #0f0c29, #302b63, #b745ef);
+    -fx-background-radius: 6;
+}
+
+.button .text
+{
+
+}
+
+.text-area
+{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+    -fx-text-fill: white;
+}
+
+
+.text-area .scroll-bar:vertical
+{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.text-area .scroll-bar:horizontal
+{
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.text-area, .text-area .viewport, .text-area .content {
+    -fx-background-color: rgba(0, 0, 0, 0.1);
+}
+
+.text-area .scroll-bar > .increment-button,
+.text-area .scroll-bar > .decrement-button {
+    -fx-opacity: 0; /* Делаем стрелки невидимыми */
+    -fx-padding: 0; /* Убираем отступы */
+    -fx-start-margin: 0;
+    -fx-end-margin: 0;
+}
+
+.text-area .scroll-bar:vertical .corner {
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-bar:vertical .increment-button,
+.text-area .scroll-bar:vertical .decrement-button {
+    -fx-padding: 0; /* Убираем отступы, чтобы кнопки не отображались */
+    -fx-background-color: transparent; /* Делаем фон кнопок прозрачным */
+    -fx-shape: '';
+}
+
+/* Убрать горизонтальные стрелки (если нужно) */
+.text-area .scroll-bar:horizontal .increment-button,
+.text-area .scroll-bar:horizontal .decrement-button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-shape: '';
+}
