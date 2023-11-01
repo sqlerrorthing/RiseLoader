@@ -165,7 +165,8 @@ public class ClientLaunchController extends Controller {
             File tempFile;
             try
             {
-                tempFile = File.createTempFile("ast", ".zip");
+                tempFile = File.createTempFile("asts", ".zip");
+                tempFile.deleteOnExit();
             }
             catch (Exception e)
             {
@@ -188,7 +189,8 @@ public class ClientLaunchController extends Controller {
                 subProgress.setVisible(false);
                 subProgress.setProgress(0);
             });
-            unzip(tempFile, assetsFolder.toPath());
+            unzip(tempFile, new File(OSUtils.getRiseFolder().toFile(), "run").toPath());
+            tempFile.delete();
         }
     }
 
@@ -196,15 +198,15 @@ public class ClientLaunchController extends Controller {
     {
         try (ZipArchiveInputStream zipInput = new ZipArchiveInputStream(new FileInputStream(zipFile))) {
             ArchiveEntry entry;
-            byte[] buffer = new byte[8192]; // Буфер для чтения данных
+            byte[] buffer = new byte[8192];
 
-            long totalBytes = zipFile.length(); // Общее количество байт в архиве
-            long bytesRead = 0; // Количество прочитанных байт
+            long totalBytes = zipFile.length();
+            long bytesRead = 0;
 
             AtomicInteger lastPercent = new AtomicInteger();
             while ((entry = zipInput.getNextEntry()) != null) {
                 if (entry.isDirectory()) {
-                    continue; // Пропускаем директории
+                    continue;
                 }
 
                 File outputFile = to.resolve(entry.getName()).toFile();
