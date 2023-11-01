@@ -1,6 +1,6 @@
 .slider .track
 {
-    -fx-background-color: rgba(66, 17, 87, 0.65);
+    -fx-background-color: rgba(0, 0, 0, 0.1);
 }
 
 .slider .thumb {

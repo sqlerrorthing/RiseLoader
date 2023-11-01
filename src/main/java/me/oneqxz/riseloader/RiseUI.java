@@ -9,6 +9,7 @@ import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.ClientInfo;
 import me.oneqxz.riseloader.rise.RiseInfo;
 import me.oneqxz.riseloader.settings.Settings;
+import me.oneqxz.riseloader.utils.OSUtils;
 import me.oneqxz.riseloader.utils.Version;
 import me.oneqxz.riseloader.utils.requests.Requests;
 import me.oneqxz.riseloader.utils.requests.Response;
@@ -28,6 +29,17 @@ public class RiseUI extends Application {
     public void start(Stage stage) throws IOException {
         Stage loadingStage = new Loading().show(true);
 
+        if(OSUtils.getOS() == OSUtils.OS.UNDEFINED)
+        {
+            log.info("Cannot detect OS!");
+            loadingStage.close();
+            new ErrorBox().show(new IllegalStateException("Can't detect OS! " + OSUtils.getOS().name()));
+        }
+        else
+        {
+            log.info("Detected OS: " + OSUtils.getOS().name());
+        }
+
         Thread thread = new Thread(() ->
         {
             Settings.getSettings();
@@ -39,12 +51,8 @@ public class RiseUI extends Application {
                 e.printStackTrace();
 
                 Platform.runLater(() -> {
-                    try {
-                        loadingStage.close();
-                        new ErrorBox().show(e);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    loadingStage.close();
+                    new ErrorBox().show(e);
                 });
 
                 return;

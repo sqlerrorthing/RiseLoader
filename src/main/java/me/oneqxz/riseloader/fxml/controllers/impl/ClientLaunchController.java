@@ -55,12 +55,8 @@ public class ClientLaunchController extends Controller {
 
         if(info == null)
         {
-            try {
-                MainScene.closeSelf();
-                new ErrorBox().show(new IllegalStateException("RiseInfo is null!"));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            MainScene.closeSelf();
+            new ErrorBox().show(new IllegalStateException("RiseInfo is null!"));
         }
 
         if(!rootDir.exists())

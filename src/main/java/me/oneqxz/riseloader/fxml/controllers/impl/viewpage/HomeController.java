@@ -37,11 +37,7 @@ public class HomeController extends Controller {
                 Parent loading = FX.createNewParent("runState.fxml", new ClientLaunchController(), null);
                 MainScene.addChildren(loading);
             } catch (IOException e) {
-                try {
-                    new ErrorBox().show(e);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                new ErrorBox().show(e);
             }
         });
     }

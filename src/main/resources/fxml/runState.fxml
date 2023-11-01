@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="817.0" style="-fx-background-color: rgba(0, 0, 0, 0.3); -fx-background-radius: 6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="817.0" style="-fx-background-radius: 6;" styleClass="background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@css/buttons.css" />
       <URL value="@css/main.css" />
       <URL value="@css/launching.css" />
    </stylesheets>
    <children>
-      <Pane layoutX="197.0" layoutY="134.0" prefHeight="183.0" prefWidth="424.0" style="-fx-background-color: rgba(0, 0, 0, 0.8); -fx-background-radius: 12;">
+      <Pane layoutX="197.0" layoutY="134.0" prefHeight="183.0" prefWidth="424.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 12;">
          <children>
             <Button fx:id="cancelRun" layoutX="48.0" layoutY="124.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="328.0" stylesheets="@css/buttons.css" text="Cancel" textFill="WHITE">
                <font>
@@ -26,9 +26,9 @@
                   <String fx:value="launchButton" />
                </styleClass>
             </Button>
-            <ProgressBar fx:id="mainProgress" layoutX="71.0" layoutY="31.0" prefHeight="32.0" prefWidth="282.0" />
-            <Label fx:id="status" alignment="CENTER" layoutX="71.0" layoutY="13.0" prefHeight="17.0" prefWidth="282.0" text="Initializing..." textFill="WHITE" />
-            <ProgressBar fx:id="subProgress" layoutX="96.0" layoutY="75.0" prefHeight="17.0" prefWidth="232.0" />
+            <ProgressBar fx:id="mainProgress" layoutX="71.0" layoutY="32.0" prefHeight="32.0" prefWidth="282.0" />
+            <Label fx:id="status" alignment="CENTER" layoutX="71.0" layoutY="14.0" prefHeight="17.0" prefWidth="282.0" text="Initializing..." textFill="WHITE" />
+            <ProgressBar fx:id="subProgress" layoutX="96.0" layoutY="76.0" prefHeight="17.0" prefWidth="232.0" />
          </children>
       </Pane>
    </children>

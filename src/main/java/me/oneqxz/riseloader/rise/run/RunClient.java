@@ -40,12 +40,8 @@ public class RunClient {
 
         } catch (Exception x) {
             x.printStackTrace();
-            try {
-                MainScene.closeSelf();
-                new ErrorBox().show(x);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            MainScene.closeSelf();
+            new ErrorBox().show(x);
         }
         try
         {
@@ -153,23 +149,15 @@ public class RunClient {
                     MainScene.hideSelf();
                     launchDebug.show();
                 } catch (IOException e) {
-                    try {
-                        new ErrorBox().show(e);
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    new ErrorBox().show(e);
                 }
             });
         }
         catch (Exception e)
         {
             e.printStackTrace();
-            try {
-                MainScene.closeSelf();
-                new ErrorBox().show(e);
-            } catch (IOException x) {
-                throw new RuntimeException(x);
-            }
+            MainScene.closeSelf();
+            new ErrorBox().show(e);
         }
     }
 

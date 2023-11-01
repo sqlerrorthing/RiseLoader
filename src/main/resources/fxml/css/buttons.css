@@ -53,3 +53,13 @@
 {
     -fx-background-color: #9e3bce;
 }
+
+.dangerButton
+{
+    -fx-background-color: #ef4545;
+}
+
+.dangerButton:hover
+{
+    -fx-background-color: #ce3b3b;
+}
