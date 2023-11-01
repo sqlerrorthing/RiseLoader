@@ -11,6 +11,8 @@ import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.RiseInfo;
 import me.oneqxz.riseloader.rise.run.RunClient;
 import me.oneqxz.riseloader.utils.OSUtils;
+import org.apache.commons.compress.archivers.ArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
@@ -33,6 +35,12 @@ public class ClientLaunchController extends Controller {
     boolean aborted = false;
 
 
+    private void stop()
+    {
+        aborted = true;
+        MainScene.removeChildren(root);
+    }
+
     @Override
     protected void init() {
         status = (Label) root.lookup("#status");
@@ -42,10 +50,7 @@ public class ClientLaunchController extends Controller {
         mainProgress = (ProgressBar) root.lookup("#mainProgress");
         subProgress = (ProgressBar) root.lookup("#subProgress");
 
-        cancel.setOnMouseClicked((event) -> {
-            aborted = true;
-            MainScene.removeChildren(root);
-        });
+        cancel.setOnMouseClicked((event) -> stop());
 
         subProgress.setVisible(false);
 
@@ -70,6 +75,7 @@ public class ClientLaunchController extends Controller {
             checkHashesOrDownload(info.getJava(), rootDir.getAbsolutePath(), "java", checkedFiles, filesToCheck);
             checkHashesOrDownload(info.getNatives(), rootDir.getAbsolutePath(), "natives", checkedFiles, filesToCheck);
             checkHashesOrDownload(info.getRise(), rootDir.getAbsolutePath(), "rise", checkedFiles, filesToCheck);
+            checkAssets();
 
             if(!aborted)
             {
@@ -145,6 +151,91 @@ public class ClientLaunchController extends Controller {
             {
                 mainProgress.setProgress((double) checkedFiles.get() / filesToCheck);
             });
+        }
+    }
+
+    private void checkAssets()
+    {
+        if(aborted)
+            return;
+
+        File assetsFolder = new File(OSUtils.getRiseFolder().toFile(), "run\\assets");
+        if(!assetsFolder.exists())
+        {
+            File tempFile;
+            try
+            {
+                tempFile = File.createTempFile("ast", ".zip");
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+                stop();
+                new ErrorBox().show(e);
+                return;
+            }
+
+            Platform.runLater(() ->
+            {
+                status.setText("Downloading assets...");
+                subProgress.setVisible(true);
+                subProgress.setProgress(0);
+            });
+            downloadFile(RiseUI.serverIp + "/file/assets.zip", tempFile.getAbsolutePath());
+            Platform.runLater(() ->
+            {
+                status.setText("Unzipping assets...");
+                subProgress.setVisible(false);
+                subProgress.setProgress(0);
+            });
+            unzip(tempFile, assetsFolder.toPath());
+        }
+    }
+
+    private void unzip(File zipFile, Path to)
+    {
+        try (ZipArchiveInputStream zipInput = new ZipArchiveInputStream(new FileInputStream(zipFile))) {
+            ArchiveEntry entry;
+            byte[] buffer = new byte[8192]; // Буфер для чтения данных
+
+            long totalBytes = zipFile.length(); // Общее количество байт в архиве
+            long bytesRead = 0; // Количество прочитанных байт
+
+            AtomicInteger lastPercent = new AtomicInteger();
+            while ((entry = zipInput.getNextEntry()) != null) {
+                if (entry.isDirectory()) {
+                    continue; // Пропускаем директории
+                }
+
+                File outputFile = to.resolve(entry.getName()).toFile();
+                if (!outputFile.getParentFile().exists()) {
+                    outputFile.getParentFile().mkdirs();
+                }
+
+                try (OutputStream output = new FileOutputStream(outputFile)) {
+                    int bytesReadInEntry;
+                    while ((bytesReadInEntry = zipInput.read(buffer)) != -1) {
+                        output.write(buffer, 0, bytesReadInEntry);
+                        bytesRead += bytesReadInEntry;
+                        int percent = (int) ((bytesRead * 100) / totalBytes);
+                        if(percent > (lastPercent.get() +1))
+                        {
+                            Platform.runLater(() ->
+                            {
+                                mainProgress.setProgress(percent / 100.0);
+                                lastPercent.set(percent);
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            stop();
+            new ErrorBox().show(e);
+            return;
         }
     }
 

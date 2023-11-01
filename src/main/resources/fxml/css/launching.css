@@ -1,5 +1,5 @@
 .progress-bar {
-    -fx-background-color: #9738c4;
+    -fx-background-color: transparent;
     -fx-background-insets: 0, 1;
     -fx-indeterminate-bar-length: 60;
     -fx-indeterminate-bar-escape: true;
@@ -20,7 +20,7 @@
 }
 
 .progress-bar .track {
-    -fx-background-color: rgba(32, 12, 42, 0.53);
+    -fx-background-color: rgba(183, 69, 239, 0.2);
     /*-fx-background-insets:  0, 1;*/
 }
 

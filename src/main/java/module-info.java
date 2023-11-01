@@ -12,6 +12,7 @@ module me.oneqxz.riseloader {
     requires yamlconfiguration;
     requires java.management;
     requires org.apache.commons.io;
+    requires org.apache.commons.compress;
 
     opens me.oneqxz.riseloader to javafx.fxml;
     exports me.oneqxz.riseloader;

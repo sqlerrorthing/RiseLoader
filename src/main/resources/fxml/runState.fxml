@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="817.0" style="-fx-background-radius: 6;" styleClass="background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="817.0" style="-fx-background-radius: 6; -fx-background-color: rgba(0, 0, 0, 0.6);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@css/buttons.css" />
       <URL value="@css/main.css" />
       <URL value="@css/launching.css" />
    </stylesheets>
    <children>
-      <Pane layoutX="197.0" layoutY="134.0" prefHeight="183.0" prefWidth="424.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 12;">
+      <Pane layoutX="197.0" layoutY="134.0" prefHeight="183.0" prefWidth="424.0" style="-fx-background-color: rgba(0, 0, 0, 0.6); -fx-background-radius: 12;">
          <children>
             <Button fx:id="cancelRun" layoutX="48.0" layoutY="124.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="328.0" stylesheets="@css/buttons.css" text="Cancel" textFill="WHITE">
                <font>

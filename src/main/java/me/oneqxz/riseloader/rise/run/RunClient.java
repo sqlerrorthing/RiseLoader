@@ -10,9 +10,7 @@ import me.oneqxz.riseloader.utils.OSUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.*;
 
@@ -116,13 +114,13 @@ public class RunClient {
             }
 
             ProcessBuilder pb = new ProcessBuilder(command);
+            pb.redirectErrorStream(true);
 
             File runDir = new File(rootFolder, "run");
             if(!runDir.exists())
                 runDir.mkdirs();
 
             pb.directory(runDir);
-            pb.redirectErrorStream(true);
 
             Map<String, String> env = pb.environment();
             env.put("CLASSPATH", classpath.toString());
@@ -138,7 +136,7 @@ public class RunClient {
             env.put("JAVA_OPTS", "");
             env.put("JAVA_OPTIONS", "");
 
-            Process process = pb.inheritIO().start();
+            Process process = pb.start();
             LaunchDebug launchDebug = new LaunchDebug(process);
 
             Runtime.getRuntime().addShutdownHook(new Thread(process::destroy));
