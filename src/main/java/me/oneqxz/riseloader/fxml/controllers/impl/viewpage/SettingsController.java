@@ -23,7 +23,7 @@ public class SettingsController extends Controller {
     private Slider memorySlider;
     private Label memorySelected;
 
-    private CheckBox fullscreen;
+    private CheckBox fullscreen, javaoptimize;
     private TextField screenWidth, screenHeight;
 
     private Button openFolder, deleteSaves, deleteClient;
@@ -36,6 +36,8 @@ public class SettingsController extends Controller {
         fullscreen = (CheckBox) root.lookup("#fullscreen");
         screenWidth = (TextField) root.lookup("#screenWidth");
         screenHeight = (TextField) root.lookup("#screenHeight");
+
+        javaoptimize = (CheckBox) root.lookup("#javaoptimize");
 
         openFolder = (Button) root.lookup("#openFolder");
         deleteSaves = (Button) root.lookup("#deleteSaves");
@@ -120,5 +122,11 @@ public class SettingsController extends Controller {
 
         onlyNumbers(screenWidth);
         onlyNumbers(screenHeight);
+
+        javaoptimize.setSelected(Settings.getSettings().getBoolean("others.javaoptimize", true));
+
+        javaoptimize.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            Settings.getSettings().set("others.javaoptimize", newValue);
+        });
     }
 }

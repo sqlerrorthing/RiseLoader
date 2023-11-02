@@ -189,7 +189,7 @@ public class ClientLaunchController extends Controller {
                 subProgress.setVisible(false);
                 subProgress.setProgress(0);
             });
-            unzip(tempFile, new File(OSUtils.getRiseFolder().toFile(), "run").toPath());
+            unzip(tempFile, assetsFolder.toPath());
             tempFile.delete();
         }
     }
@@ -205,7 +205,7 @@ public class ClientLaunchController extends Controller {
 
             AtomicInteger lastPercent = new AtomicInteger();
             while ((entry = zipInput.getNextEntry()) != null) {
-                if (entry.isDirectory()) {
+                if (entry.isDirectory() || aborted) {
                     continue;
                 }
 
@@ -236,7 +236,7 @@ public class ClientLaunchController extends Controller {
         {
             e.printStackTrace();
             stop();
-            new ErrorBox().show(e);
+            Platform.runLater(() -> new ErrorBox().show(e, false));
             return;
         }
     }
@@ -266,6 +266,8 @@ public class ClientLaunchController extends Controller {
             return calculatedMd5Hash.equals(md5Hash);
         } catch (NoSuchAlgorithmException | IOException e) {
             e.printStackTrace();
+            stop();
+            Platform.runLater(() -> new ErrorBox().show(e, false));
             return false;
         }
     }
@@ -312,6 +314,8 @@ public class ClientLaunchController extends Controller {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            stop();
+            Platform.runLater(() -> new ErrorBox().show(e, false));
         }
     }
 }

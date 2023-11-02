@@ -62,27 +62,31 @@ public class RunClient {
             command.add("-Xms" + Settings.getSettings().getInt("preferences.memory") + "M");
             command.add("-Djava.library.path=" + rootFolder.getAbsolutePath() + "\\natives\\" + osNatives);
             command.add("-Dfile.encoding=UTF-8");
-            command.add("-XX:+DisableAttachMechanism");
-            command.add("-XX:+UseG1GC");
             command.add("-Dsun.stdout.encoding=UTF-8");
 
-            command.add("-XX:+DisableExplicitGC");
-            command.add("-XX:+UseNUMA");
-            command.add("-XX:MaxTenuringThreshold=15");
-            command.add("-XX:MaxGCPauseMillis=30");
-            command.add("-XX:GCPauseIntervalMillis=150");
-            command.add("-XX:-UseGCOverheadLimit");
-            command.add("-XX:SurvivorRatio=8");
-            command.add("-XX:TargetSurvivorRatio=90");
-            command.add("-XX:MaxTenuringThreshold=15");
-            command.add("-Dfml.ignorePatchDiscrepancies=true");
-            command.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
-            command.add("-XX:+UseCompressedOops");
-            command.add("-XX:+OptimizeStringConcat");
-            command.add("-XX:ReservedCodeCacheSize=2048m");
-            command.add("-XX:+UseCodeCacheFlushing");
-            command.add("-XX:SoftRefLRUPolicyMSPerMB=10000");
-            command.add("-XX:ParallelGCThreads=10");
+
+            if(Settings.getSettings().getBoolean("others.javaoptimize", true))
+            {
+                command.add("-XX:+DisableAttachMechanism");
+                command.add("-XX:+UseG1GC");
+                command.add("-XX:+DisableExplicitGC");
+                command.add("-XX:+UseNUMA");
+                command.add("-XX:MaxTenuringThreshold=15");
+                command.add("-XX:MaxGCPauseMillis=30");
+                command.add("-XX:GCPauseIntervalMillis=150");
+                command.add("-XX:-UseGCOverheadLimit");
+                command.add("-XX:SurvivorRatio=8");
+                command.add("-XX:TargetSurvivorRatio=90");
+                command.add("-XX:MaxTenuringThreshold=15");
+                command.add("-Dfml.ignorePatchDiscrepancies=true");
+                command.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
+                command.add("-XX:+UseCompressedOops");
+                command.add("-XX:+OptimizeStringConcat");
+                command.add("-XX:ReservedCodeCacheSize=2048m");
+                command.add("-XX:+UseCodeCacheFlushing");
+                command.add("-XX:SoftRefLRUPolicyMSPerMB=10000");
+                command.add("-XX:ParallelGCThreads=10");
+            }
 
             command.add("-classpath");
             command.add(classpath.toString());

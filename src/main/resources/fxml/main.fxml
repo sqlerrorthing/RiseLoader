@@ -81,24 +81,6 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Button>
-            <Button fx:id="btnStatistics" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="44.0" prefWidth="130.0" styleClass="navButton" text="Statistics">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="44.0" />
-               </VBox.margin>
-               <graphic>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAwZJREFUeF7tmk3ITUEYx39vvkuRjwiRsiAbFr4iX5GFhYUsLBWJsLAiWb07VqxEsVKKUFairGThY+EtvVnYiISFhUIU/TXn7bjOe++cM3PmzOnMqdtdnDlznv9v/vPMPHPvEB2/hjqunwQgOaDjBNIU6LgBUhJMUyBNgY4TSFOg4wYYWwUmAjPM5yvwsQVg8jHbhDsBmAbouQ/Aez2kKTAdWA1sAxaYG4+B18Bbm54baDMf2AisNDHbhDAJmAVMBkaA+8BzAdgJnAK2m15+AKPADeB6hBBmAvuBM8BCG+UFbX4DL4FhAbgIHO9pFDOEDcA5YFNF8dljgnBPAG4Bews6ixXCHuAKMNcRgB4fEYCrwIFxOosRwm7gErDIA4BRAZD9h80KUNRnbBBWAWcBgZjiCOGZAKjD08CulkCQ6M3AIWBZT8y6NxuYagnmiQDoobXAsZZB0BRYkVsG5wBbgHV9BrKXy18AutoIIS9G4vcBJ4DllqOvZmMA2gyhqvj/ALQRgov4QgBtgmAr/ifwy9QB4+aA3hux5wRb8Z+BN8A8YElBbvgnB7QFQhnxN4FXwFGzYlg7IGsYmxPKiledo+VS31oySwOIKSdUEa+qdocrgBggVBWv2FU1ngfWFzjgUZkzwaamg4t4aV4KnDRb53zt8AW4VgZAE05wFZ/FrNrhiDlBUq2gZfEhcKEsgJAQfIjPJ3MVTqp55IjvwAPgaRUAISD4FN+3NKgKoE4IwcRLhAuAOiAEFe8DgE8IwcX7AuADQiPifQJwgfDN8jBDhY329trWaofn5XLNAa4F1F1AG5LDA05yahHv2wFVCqhPJhH3+4WnNvF1ASgzHQbZuFbxdQLwAaF28XUDcIEQRHwIAFUgBBMfCkAZCEHFhwRgAyG4+NAA8hAOAluBxaY2fwfcBi773OQMWmKaAJBBUG2us7o1gH59fgHcyf63YxO4rza+d4K+4grWTwIQDHWkL0oOiHRggoWVHBAMdaQvSg6IdGCChZUcEAx1pC9KDoh0YIKF1XkH/AE7oRUT678J3wAAAABJRU5ErkJggg==" />
-                     </image>
-                     <effect>
-                        <ColorAdjust brightness="1.0" />
-                     </effect>
-                  </ImageView>
-               </graphic>
-            </Button>
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

@@ -20,75 +20,126 @@
       <URL value="@../css/settings.css" />
    </stylesheets>
    <children>
-      <Pane prefHeight="231.0" prefWidth="362.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+      <Pane prefHeight="382.0" prefWidth="362.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
          <children>
             <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETTINGS">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="14.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allocated Memory" wrappingWidth="127.396484375">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Text>
-            <Text fill="#ffffff99" layoutX="14.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much memory should we allocate to the game instance" wrappingWidth="344.396484375" />
-            <Slider fx:id="memorySlider" layoutX="14.0" layoutY="96.0" majorTickUnit="2.0" max="0" min="500.0" minorTickCount="2" prefHeight="37.0" prefWidth="265.0" value="0" />
-            <Pane layoutX="289.0" layoutY="100.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+            <VBox layoutX="14.0" layoutY="47.0" prefHeight="321.0" prefWidth="351.0">
                <children>
-                  <Label fx:id="memorySelected" alignment="CENTER" layoutX="7.0" layoutY="5.0" prefHeight="17.0" prefWidth="43.0" text="0" textFill="WHITE" />
+                  <Pane prefHeight="82.0" prefWidth="351.0">
+                     <children>
+                        <Text fill="WHITE" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Allocated Memory" wrappingWidth="127.396484375">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#ffffff99" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How much memory should we allocate to the game instance" wrappingWidth="344.396484375" />
+                        <Slider fx:id="memorySlider" layoutY="48.0" majorTickUnit="2.0" max="0" min="500.0" minorTickCount="2" prefHeight="37.0" prefWidth="265.0" value="0" />
+                        <Pane layoutX="278.0" layoutY="52.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+                           <children>
+                              <Label fx:id="memorySelected" alignment="CENTER" layoutX="7.0" layoutY="5.0" prefHeight="17.0" prefWidth="43.0" text="0" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Pane prefHeight="86.0" prefWidth="351.0">
+                     <children>
+                        <Text fill="WHITE" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Resolution" wrappingWidth="127.396484375">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#ffffff99" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set the resolution of the game instance" wrappingWidth="344.396484375" />
+                        <CheckBox fx:id="fullscreen" layoutY="51.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Launch in Fullscreen?" textFill="#cdcbcb">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </CheckBox>
+                        <Pane layoutX="277.0" layoutY="45.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+                           <children>
+                              <TextField fx:id="screenHeight" alignment="CENTER" layoutY="3.0" prefHeight="25.0" prefWidth="59.0" />
+                           </children>
+                        </Pane>
+                        <Pane layoutX="193.0" layoutY="47.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+                           <children>
+                              <TextField fx:id="screenWidth" alignment="CENTER" prefHeight="25.0" prefWidth="59.0" />
+                           </children>
+                        </Pane>
+                        <Label fx:id="memorySelected111" alignment="CENTER" layoutX="252.0" layoutY="53.0" prefHeight="17.0" prefWidth="25.0" text="X" textFill="WHITE" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Pane prefHeight="89.0" prefWidth="351.0">
+                     <children>
+                        <CheckBox fx:id="javaoptimize" layoutX="1.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Optimizing java" textFill="#cdcbcb">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </CheckBox>
+                        <Text fill="#ffffff99" layoutX="1.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adds several startup parameters that optimize Java " wrappingWidth="344.396484375">
+                           <font>
+                              <Font size="11.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
                </children>
-            </Pane>
-            <Label fx:id="memorySelected111" alignment="CENTER" layoutX="267.0" layoutY="183.0" prefHeight="17.0" prefWidth="25.0" text="X" textFill="WHITE" />
-            <Text fill="WHITE" layoutX="14.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Resolution" wrappingWidth="127.396484375">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Text>
-            <Text fill="#ffffff99" layoutX="14.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set the resolution of the game instance" wrappingWidth="344.396484375" />
-            <CheckBox fx:id="fullscreen" layoutX="14.0" layoutY="183.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Launch in Fullscreen?" textFill="#cdcbcb" />
-            <Pane layoutX="211.0" layoutY="177.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
-               <children>
-                  <TextField fx:id="screenWidth" alignment="CENTER" layoutY="3.0" prefHeight="25.0" prefWidth="59.0" />
-               </children>
-            </Pane>
-            <Pane layoutX="289.0" layoutY="177.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
-               <children>
-                  <TextField fx:id="screenHeight" alignment="CENTER" layoutY="2.0" prefHeight="25.0" prefWidth="59.0" />
-               </children>
-            </Pane>
+            </VBox>
          </children>
       </Pane>
-      <Pane layoutX="383.0" prefHeight="231.0" prefWidth="235.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+      <Pane layoutX="383.0" prefHeight="382.0" prefWidth="235.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
          <children>
             <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OTHER">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
-            <VBox layoutX="17.0" layoutY="51.0" prefHeight="182.0" prefWidth="201.0">
+            <VBox layoutX="17.0" layoutY="51.0" prefHeight="315.0" prefWidth="209.0">
                <children>
-                  <Button fx:id="openFolder" mnemonicParsing="false" prefHeight="37.0" prefWidth="207.0" styleClass="launchButton" text="Open folder" textFill="WHITE">
+                  <Button fx:id="openFolder" mnemonicParsing="false" prefHeight="37.0" prefWidth="207.0" styleClass="defaultButton" text="Open folder" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
+                  <Text fill="#ffffff99" strokeType="OUTSIDE" strokeWidth="0.0" text="Opens the directory in Explorer where the client and its files are installed" wrappingWidth="208.396484375">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Text>
                   <Button fx:id="deleteSaves" mnemonicParsing="false" prefHeight="37.0" prefWidth="207.0" styleClass="dangerButton" text="Delete saves" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="5.0" />
                      </VBox.margin>
                   </Button>
+                  <Text fill="#ffffff99" strokeType="OUTSIDE" strokeWidth="0.0" text="Deletes the run folder in the .rise folder, deleting also deletes all configs and scripts" wrappingWidth="208.396484375">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Text>
                   <Button fx:id="deleteClient" mnemonicParsing="false" prefHeight="37.0" prefWidth="207.0" styleClass="dangerButton" text="Delete client" textFill="WHITE">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Button>
+                  <Text fill="#ffffff99" strokeType="OUTSIDE" strokeWidth="0.0" text="Deletes java, rise, natives, it won't break anything but you'll have to re-download them" wrappingWidth="208.396484375">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Text>
                </children>
             </VBox>
          </children>

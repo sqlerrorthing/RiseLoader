@@ -23,7 +23,7 @@
                </font>
                <styleClass>
                   <String fx:value="navButton" />
-                  <String fx:value="launchButton" />
+                  <String fx:value="defaultButton" />
                </styleClass>
             </Button>
             <ProgressBar fx:id="mainProgress" layoutX="71.0" layoutY="32.0" prefHeight="32.0" prefWidth="282.0" />

@@ -11,14 +11,13 @@ import java.net.URI;
 
 public class MainController extends Controller {
 
-    Button home, settings, statistics;
+    Button home, settings;
     Text version;
 
     @Override
     protected void init() {
         this.home = ((Button) root.lookup("#btnHome"));
         this.settings = ((Button) root.lookup("#btnSettings"));
-        this.statistics = ((Button) root.lookup("#btnStatistics"));
 
         this.version = ((Text) root.lookup("#version"));
 
@@ -28,10 +27,6 @@ public class MainController extends Controller {
 
         this.settings.setOnMouseClicked(event -> {
             MainScene.setCurrenViewPage(MainScene.Page.SETTINGS);
-        });
-
-        this.statistics.setOnMouseClicked(event -> {
-            MainScene.setCurrenViewPage(MainScene.Page.STATISTICS);
         });
 
         this.version.setText("v" + RiseUI.version.getVersion());

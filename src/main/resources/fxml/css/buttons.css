@@ -46,10 +46,20 @@
 
 .launchButton
 {
-    -fx-background-color: #b745ef;
+    -fx-background-color: #48c771;
 }
 
 .launchButton:hover
+{
+    -fx-background-color: #3cb460;
+}
+
+.defaultButton
+{
+    -fx-background-color: #b745ef;
+}
+
+.defaultButton:hover
 {
     -fx-background-color: #9e3bce;
 }

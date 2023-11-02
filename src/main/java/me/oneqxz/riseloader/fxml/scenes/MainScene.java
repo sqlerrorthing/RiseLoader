@@ -35,13 +35,11 @@ public class MainScene {
     {
         Button home = ((Button) scene.getRoot().lookup("#btnHome"));
         Button settings = ((Button) scene.getRoot().lookup("#btnSettings"));
-        Button statistics = ((Button) scene.getRoot().lookup("#btnStatistics"));
         Pane pageContent = ((Pane) scene.getRoot().lookup("#pageContent"));
 
 
         home.getStyleClass().remove("navButtonActive");
         settings.getStyleClass().remove("navButtonActive");
-        statistics.getStyleClass().remove("navButtonActive");
 
         Parent pageParent = null;
         try
@@ -56,11 +54,6 @@ public class MainScene {
                 {
                     settings.getStyleClass().add("navButtonActive");
                     pageParent = FX.createNewParent("pages/settings.fxml", new SettingsController(), null);
-                }
-                case STATISTICS ->
-                {
-                    statistics.getStyleClass().add("navButtonActive");
-                    pageParent = FX.createNewParent("pages/statistics.fxml", new SettingsController(), null);
                 }
             }
         }
@@ -100,6 +93,6 @@ public class MainScene {
     }
 
     public static enum Page {
-        HOME, SETTINGS, STATISTICS;
+        HOME, SETTINGS;
     }
 }

@@ -15,6 +15,7 @@ public class ErrorBox extends Component {
             FX.showScene("RiseLoader error", "error.fxml", stage, new ErrorBoxController((Throwable) args[0]));
             FX.setMinimizeAndClose(stage, "minimizeBtn", "closeBtn", args.length == 1 || (boolean) args[1]);
             FX.setDraggable(stage.getScene(), "riseLogo");
+            stage.setIconified(false);
             return stage;
         }
         catch (Exception e)
