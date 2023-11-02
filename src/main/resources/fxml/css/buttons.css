@@ -7,7 +7,7 @@
 
 .navButton:hover
 {
-    -fx-background-color: linear-gradient(to top left, rgba(225, 149, 135, 0.5), rgba(231, 121, 170, 0.5))
+    -fx-background-color: linear-gradient(to top left, rgba(231, 121, 170, 0.5), rgba(231, 121, 170, 0.5));
 }
 
 .navButtonActive
@@ -52,6 +52,11 @@
 .launchButton:hover
 {
     -fx-background-color: #3cb460;
+}
+
+.launchButton:pressed
+{
+    -fx-translate-y: 0;
 }
 
 .defaultButton

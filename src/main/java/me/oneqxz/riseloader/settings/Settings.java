@@ -38,6 +38,8 @@ public class Settings {
         setDefault("preferences.resolution.width", 854);
         setDefault("preferences.resolution.height", 480);
 
+        setDefault("version", "release");
+
         setDefault("others.javaoptimize", true);
 
         saveConfig();

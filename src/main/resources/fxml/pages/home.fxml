@@ -1,42 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.text.TextFlow?>
 
-
-<AnchorPane prefHeight="382.0" prefWidth="618.0" stylesheets="@../css/main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="382.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="382.0" prefWidth="304.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+      <Pane prefHeight="255.0" prefWidth="618.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
          <children>
-            <TextArea fx:id="changelog" editable="false" layoutX="12.0" layoutY="59.0" prefHeight="324.0" prefWidth="279.0" style="-fx-background-color: transparent;" wrapText="true" />
+            <TextArea fx:id="changelog" editable="false" layoutX="12.0" layoutY="59.0" prefHeight="177.0" prefWidth="593.0" style="-fx-background-color: transparent;" wrapText="true" />
          </children>
       </Pane>
-      <TextFlow layoutX="330.0" layoutY="225.0" prefHeight="16.0" prefWidth="288.0" textAlignment="CENTER">
-         <children>
-            <Text fill="#dddddd" strokeType="OUTSIDE" strokeWidth="0.0" text="Latest version: " />
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" " />
-            <Text fx:id="riseVersion" fill="#e1e1e1" strokeType="OUTSIDE" strokeWidth="0.0" />
-         </children>
-      </TextFlow>
       <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WHAT'S NEW?">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Text>
-      <Button fx:id="launchButton" layoutX="327.0" layoutY="158.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="294.0" stylesheets="@../css/buttons.css" text="Launch" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="27.0" />
-         </font>
-         <styleClass>
-            <String fx:value="navButton" />
-            <String fx:value="launchButton" />
-         </styleClass>
-      </Button>
+      <Pane fx:id="launchPane" layoutX="129.0" layoutY="300.0" prefHeight="61.0" prefWidth="360.0">
+         <children>
+            <Button fx:id="launchButton" mnemonicParsing="false" prefHeight="59.0" prefWidth="279.0" style="-fx-background-radius: 12 0 0 12;" stylesheets="@../css/buttons.css" text="Launch" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="navButton" />
+                  <String fx:value="launchButton" />
+               </styleClass>
+            </Button>
+            <Button fx:id="versions" contentDisplay="GRAPHIC_ONLY" layoutX="289.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="59.0" prefWidth="70.0" style="-fx-background-radius: 0 12 12 0;" styleClass="launchButton" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAYAAABccqhmAAAAAXNSR0IArs4c6QAACmNJREFUeF7t3cGNHMcZhuEqGNDRgE8GfJIScAA+WGQKjkDKQAkYIp2AQxATcAyiDo5D9E1ZlDDSyFiROzvTM9XdVf09e5EBzlT/3/v99WJ2l4Rr8YUAArEEamxywRFAoBCAJUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdiBFwm01l6VUr4spXxeSvlQSvnh9N9a6+l/+5qcAAFMXuBa458v/rellJMAPv46Xf63tdZ3az3fudsQIIBtOE/1lPPl//6God/UWt/e8DovGZQAAQxazF5jtdZOH/V/XPB8ElgAa7SXEsBojew8T2vt9LH/zcIxSGAhsFFeTgCjNDHIHK21ducoJHAnuD3fRgB70h/s2Xd8/P84AQkM1um1cQjgGqGgP1/ww7+XqJDARDtDABOVtfaoHT4B/DYiCaxdVqfzCaATyKMc01o7/Qbg9JuAR79I4FGCG7yfADaAPNMj7vwtwKWIJDB4+QQweEF7jNfxU8BpfBLYo8Qbn0kAN4JKetn5ZwGnvwnY41sBEhh4eQhg4HL2HI0E9qS/3bMJYDvW0z2JBKarbPHABLAYWdYbSODYfRPAsfvtko4EumAc8hACGLKW8YYigfE66TERAfSgGHIGCRyvaAI4XqerJiKBVfFufjgBbI58/geSwPwd/paAAI7T5aZJSGBT3Ks9jABWQ3v8g0lg/o4JYP4Od01AArvif/jhBPAwQgeQwLw7QADzdjfU5CQwVB03D0MAN6PywmsESOAaofH+nADG62TqiUhgrvoIYK6+ppiWBKao6ZchCWCerqaalATmqIsA5uhpyilJYPzaCGD8jqaekATGro8Axu7nENORwLg1EsC43RxqMhIYs04CGLOXQ05FAuPVSgDjdXLoiUhgrHoJYKw+IqYhgXFqJoBxuoiahATGqJsAxughcgoS2L92Ati/g+gJSGDf+glgX/6eXkohgf3WgAD2Y+/JTwiQwD7rQAD7cPfUZwiQwPZrQQAvMG+t/bWU8lUp5VUp5S/b1xP5xD+UUv5USjn9t8fXm1rr2x4HHfEMArjQamvtX6WUfx6x9MBMJHChdAJ4/qPov0sp3wRelCNHJoFn2iWAj6C01v5RSvnPkW9CcLYvaq0fgvN/Ep0APhXAD6WUv1uSQxJ4X2t9fchkd4YigCfgWmt/LqX8dCdLb5uDgE8BT3oigN8L4G+llP/OscemvJMAARDA86vTWiOAO2/VRG97XWt9P9G8q47qE4BvAVZdsNEOr7XaeZ8ALq9la80PAUe7tf3m+VBr/aLfcfOfxIaf/hbArwHn3+tLCXz8/4gMATyzKq01fxHoeBLwF4Ge6ZQALiy6vwp8KAO8q7V+fahEncIQwAsg/WOgTlu27JjTPwL6Yynls2Vvu/hql/8FkATQacsc8ziB8z8H/u78ry8fP7AUl/8KRQLosWbOeJiAy/8wwrsOIIC7sHlTTwIuf0+ay84igGW8vLozAZe/M9CFxxHAQmBe3o+Ay9+P5b0nEcC95LzvIQIu/0P4ur2ZALqhdNCtBFz+W0mt/zoCWJ+xJzwh4PKPtQ4EMFYfh57G5R+vXgIYr5NDTuTyj1krAYzZy6GmcvnHrZMAxu3mEJO5/GPXSABj9zP1dC7/+PURwPgdTTmhyz9HbQQwR09TTenyz1MXAczT1RSTuvxT1PT/IQlgrr6GntblH7qeZ4cjgPk6G3Jil3/IWq4ORQBXEXnBNQIu/zVC4/45AYzbzRSTufxT1HRxSAKYu79dp3f5d8Xf5eEE0AVj3iEu/zE6J4Bj9LhpCpd/U9yrPowAVsV7vMNd/mN1SgDH6nPVNC7/qnh3OZwAdsE+30Nd/vk6u2ViAriFUvhrXP7jLgABHLfbLslc/i4Yhz2EAIatZv/BXP79O1h7AgJYm/Ck57v8kxa3cGwCWAgs4eUuf0LLv2YkgJyub07aWvve/0X3zbimfiEBTF1f/+Fba9+WUt50OvldrfXrTmc5ZgUCBLAC1JmPbK39WEr5vEMGl78DxLWPIIC1CU90/vl7/5MAHv1y+R8luNH7CWAj0DM8prX2qpRy+v7/kS+X/xF6G7+XADYGPvLjOgjA5R+54GdmI4DJClt73Ad+BuDyr13OCucTwApQZz6ytfZdKeWrhRlc/oXARnk5AYzSxCBznH8QePo5wK2/CXD5B+nunjEI4B5qB3/P+e8CnD4FXJOAyz/5LhDA5AWuNf75B4KnbwcuSeB1rfX9Ws937jYECGAbztM+5SyCL58E+F+t9d20gQz+OwIEYCEQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCBCAHUAgmAABBJcvOgIEYAcQCCZAAMHli44AAdgBBIIJEEBw+aIjQAB2AIFgAgQQXL7oCPwMQIH3EPLHbtcAAAAASUVORK5CYII=" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane fx:id="versionsPane" layoutX="125.0" layoutY="271.0" prefHeight="92.0" prefWidth="368.0" visible="false">
+         <children>
+            <Label layoutX="119.0" text="Select version" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Button fx:id="versionBeta" layoutX="1.0" layoutY="30.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="180.0" style="-fx-background-radius: 12 0 0 12;" stylesheets="@../css/buttons.css" text="Public beta" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="navButton" />
+                  <String fx:value="launchButton" />
+               </styleClass>
+            </Button>
+            <Button fx:id="versionRelease" contentDisplay="CENTER" layoutX="188.0" layoutY="30.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="59.0" prefWidth="180.0" style="-fx-background-radius: 0 12 12 0;" styleClass="launchButton" text="Release" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
    </children>
+   <stylesheets>
+      <URL value="@../css/main.css" />
+      <URL value="@../css/buttons.css" />
+   </stylesheets>
 </AnchorPane>

@@ -2,6 +2,7 @@ package me.oneqxz.riseloader;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.components.impl.Loading;
@@ -28,7 +29,6 @@ public class RiseUI extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Stage loadingStage = new Loading().show(true);
-
         if(OSUtils.getOS() == OSUtils.OS.UNDEFINED)
         {
             log.info("Cannot detect OS!");

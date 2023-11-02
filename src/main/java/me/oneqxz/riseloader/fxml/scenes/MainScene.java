@@ -1,5 +1,9 @@
 package me.oneqxz.riseloader.fxml.scenes;
 
+import animatefx.animation.BounceIn;
+import animatefx.animation.FadeIn;
+import animatefx.animation.FadeInDown;
+import animatefx.animation.FadeInUp;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -63,6 +67,8 @@ public class MainScene {
         }
 
         pageContent.getChildren().clear();
+
+        new FadeIn(pageParent).setSpeed(1.5).play();
         pageContent.getChildren().add(pageParent);
         System.gc();
     }
