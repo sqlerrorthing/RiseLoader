@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <AnchorPane prefHeight="382.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -46,7 +47,7 @@
             </Button>
          </children>
       </Pane>
-      <Pane fx:id="versionsPane" layoutX="125.0" layoutY="271.0" prefHeight="92.0" prefWidth="368.0" visible="false">
+      <Pane fx:id="versionsPane" layoutX="125.0" layoutY="271.0" prefHeight="110.0" prefWidth="368.0" visible="false">
          <children>
             <Label layoutX="119.0" text="Select version" textFill="WHITE">
                <font>
@@ -67,6 +68,20 @@
                   <Font name="System Bold" size="27.0" />
                </font>
             </Button>
+            <TextFlow layoutX="3.0" layoutY="91.0" prefHeight="12.0" prefWidth="180.0" textAlignment="CENTER">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Last updated: " />
+                  <Text fx:id="betaLastUpdated" fill="#ffffffcc" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text fill="#ffffffcc" strokeType="OUTSIDE" strokeWidth="0.0" text=" ago" />
+               </children>
+            </TextFlow>
+            <TextFlow layoutX="188.0" layoutY="91.0" prefHeight="12.0" prefWidth="180.0" textAlignment="CENTER">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Last updated: " />
+                  <Text fx:id="releaseLastUpdated" fill="#ffffffcc" strokeType="OUTSIDE" strokeWidth="0.0" />
+                  <Text fill="#ffffffcc" strokeType="OUTSIDE" strokeWidth="0.0" text=" ago" />
+               </children>
+            </TextFlow>
          </children>
       </Pane>
    </children>

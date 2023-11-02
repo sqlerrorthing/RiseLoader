@@ -6,14 +6,16 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="453.0" prefWidth="829.0" styleClass="background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="453.0" prefWidth="829.0" style="-fx-background-color: transparent; -fx-background-radius: 6;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@css/main.css" />
       <URL value="@css/buttons.css" />
    </stylesheets>
    <children>
+      <Rectangle fx:id="background" arcHeight="12.0" arcWidth="12.0" fill="#1f93ff00" height="453.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="829.0" />
       <ImageView fx:id="riseLogo" fitHeight="101.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAnQAAAJ0BAMAAABpR6P8AAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAASUExURUxpcfjx+vnu+/rw+/ru+vPl99Xnhd0AAAAFdFJOUwA7y5hwkSZxngAAB3tJREFUeNrt3UFS20oQBmC74AAG5QK28R6ceB8buICJ7n+VR5JKVfLCyKZn5FDq7yu2LPxXt0aaGWlmMwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAam98MWSwWIiol97gqWK+3n394+h6hpP7yuOlPOb7m+Hl/I6s/XZ9O7qfVeq/y/nDVn+34ReEFo+t7hReO7rXwZBeMrj/eyS4Y3femFVowOtnFo5NdPLp+7XoXjU528eh642w4uv5OctHojg+iC0bXH7+KLhidoSIe3fFOdOHs9qLTshePrn8QXW+UvXR0yR8qqqLLPVJURZe77OqiS112ddGlvkGpjC7zNEBldJmvdrXRJb63q40u8aTnda/s/lV0/VJ0US8L0ZlAuXh0d6IzULwzuk1voIiZN4gu6UAx3+nYqEOvY4M6HRvu2MfVaqNjY9ndfHp69fj5D+v1erX9+cKTu+KzLBa/v233I9PvoZ6K75vkSj5tT3TsQkbFO+etjg1fEbeeY8fJ7kXHRrOzyXN4rNi52IWz27jYhR/aXOzCl7uDO7vw7V25ZY0T4ZZdCudEy+6ME83LzjgRLjvjxEm3acaJ+c85t99U7mEtDrKTe57oVqvVZrPpj7++L3RcVWb3nGSIfatG1nWt1SWZKb5qfx9RWvSe2hDbjTAYPucYYm9HmFzrcgyxtyP8yNIYe6/qonfFS1V30iFvdLULCV2Ku5NRqq5wsXtRddGL3cRu7A6j3EYcMtzYPY8SXZdhLfZ5lN94neGeeJzoCo+x9xo2Ok7cq7rTdqqu7RC7VHXRO+2lqotG9010ort4w6q6cHQvqk50qu4jRteJTnSiE91HshtnhFV1olN1F4tO1f3D6G5F5/H/4te6tNGNNcF+J7podEvRnVRYTBTdGdFtErw5MU501xlW/8cZYa/6rNFVV91thu0640T3nGGT2CjRFQbYiW1NHCW6HHuJR9mSVNjBniK6yqo7pNj8P0bVld7WuVN1wUvd1N7WGaPqSm//36u6YL9O7TtsI1RdqV+n9irxCNHdJvlGTPvoit+ImdpnE9pH12X5Htau9Zxk+XtYD6IbVv7o5FfRDRfdIc1nE1tHVz5i4UV0w0W3zfOJ2MbRdYk+TNw2uqGDeL6Kbsgh07EJTaMb+hr29A7raBnd4JkTS9GFRtfpTdYVo4vcSMwPyU6IafYdnOHkprYaVo7u3RO681PnEi2zRPeui9385ubTqdOwpnjISSG6l/3NWfZPT0+fzziFbYpfES/d/q/OdtahgFP8dn2DI0yzHod9megm+en6y0Q3ybMmdvr1Q0c3zaMmdvr1Q0d3L7qgiZ6qc4noJnoM1gWim+ohnTuDxMeN7vggOoPEpaOb7Jm6O0X3YaOb7kHOO0X3UaOb8OnhO0X3QaOb8pH140a3XojOg8SFo7tbiM6UyYWjm3S7jhrdpMeIUaObeLuOGd3E23XE6O4WonOhu2x0x/1MdB4jLhrd8WEhulhyXzIkN0Z0SZIbIbr1Pkdy7aNb72cz0YWa9WYmOs16wegylVzb6LKMrCNE95AruWJ0x9VqtX39225/vdCUecn1PdGtn/7/ft3Tq8dNwh2I74yuMPEx+LrwUnRDzddlnhU+L7pSBQ19AkZ0wzHcii4a3fXGMBGMbqBjX0Q33HxdstcPG0Y30LH3ohu+5B9c7KLRdZ7EotHNN2k3mdRGN9CxS9ENR6djw9Hp2HB0OjYe3ZWOjUZXfhjL1bGB6NwVD0U3/ExVfhhL1bGRqhuYPrlXdcP/dKtjo9GVOzbTzFMouoGOfRCdjh0pOh0bjm6mY8PRdTo2Gp2OjZ9ed9Cxb0d3+jG+3LHfVN2JWzsTntGq07Hxkzq79DsowlWnY8PRWaIIN6xFxXjVpe/YeHTpO7YiuuyLihXRZV9UrIgue8fWRJd8UbEmuuQdWxNd8m0AVdHl7tiq6HJvA6iKLveiYl10qTu2LrrU2wDqokvdsZXRZV5UrIwu8zaA2ugSbwPYVT5HJe7Y2qqbPaft2NqqS7wNoLrq5mk7trrq8k54Vldd3m0A9VWXdlGxvurSdmx91aXdBtCg6rJ2bIOqy9qxDaoua8e2qLqki4otqi5px7aouqQbd5pUXc6ObVJ1ObcBNKm6nIuKbaouZce2qbqUi4ptqi5lxzaquowbdxpVXcaObVR1GRcVW1Vdwm0AraouYcc2q7p8Hdssunwd26xh823caVd16ZYo2kWX7msA7Ro23TaAhlWXrWMbRpdtiaJldMkWFRte67JNeLasumQd2zS6q1QTnk2jy9WxTaPL1bFto0u1RNE2ulQd2za6gQnPpeh07EjRZerYxtFlmvDcNV5NSNSxraObbdN0bPPo8nTsrnVvlSc8pzZX/Nz8TdZDlvXYbtN6GaY4UEzt1eL5G0XyUndB77art6z3U7s7mT/+9SNrf+PN26Y3dzLL8BsBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAf+o//T05jQcq+OsAAAAASUVORK5CYII=" />
@@ -39,7 +41,7 @@
       </Button>
       <TextArea fx:id="logs" editable="false" layoutX="20.0" layoutY="95.0" prefHeight="302.0" prefWidth="789.0" style="-fx-background-color: rgba(0, 0, 0, 0.2);" />
       <Text fill="#ffffffae" layoutX="351.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minecraft launch debug" />
-      <Button fx:id="closeExitButton" layoutX="101.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" styleClass="defaultButton" text="Close" textFill="WHITE" />
-      <Button fx:id="copyButton" layoutX="20.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="62.0" styleClass="defaultButton" text="Copy" textFill="WHITE" />
+      <Button fx:id="closeExitButton" layoutX="125.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="112.0" styleClass="dangerButton" text="Close" textFill="WHITE" />
+      <Button fx:id="copyButton" layoutX="20.0" layoutY="405.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="101.0" styleClass="defaultButton" text="Copy" textFill="WHITE" />
    </children>
 </AnchorPane>

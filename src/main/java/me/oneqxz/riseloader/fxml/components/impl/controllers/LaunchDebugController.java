@@ -3,6 +3,9 @@ package me.oneqxz.riseloader.fxml.components.impl.controllers;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.utils.OSUtils;
@@ -36,6 +39,8 @@ public class LaunchDebugController extends Controller {
 
         this.closeExitButton = (Button) root.lookup("#closeExitButton");
         this.copy = (Button) root.lookup("#copyButton");
+
+        ((Rectangle) root.lookup("#background")).setFill(new ImagePattern(new Image("/background.jpg")));
 
         BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader stderrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -86,6 +91,8 @@ public class LaunchDebugController extends Controller {
                 {
                     logs.appendText("\n\nProcess exit with status code: " + exitCode);
                     this.closeExitButton.setText("Exit");
+                    this.closeExitButton.getStyleClass().remove("dangerButton");
+                    this.closeExitButton.getStyleClass().add("defaultButton");
                 });
             }
             catch (Exception e)
@@ -93,24 +100,5 @@ public class LaunchDebugController extends Controller {
                 e.printStackTrace();
             }
         }).start();
-    }
-
-    class StreamGobbler extends Thread {
-        InputStream is;
-        StreamGobbler(InputStream is) {
-            this.is = is;
-        }
-
-        public void run() {
-            try {
-                InputStreamReader isr = new InputStreamReader(is);
-                BufferedReader br = new BufferedReader(isr);
-                String line=null;
-                while ( (line = br.readLine()) != null)
-                    System.out.println("!1!! "+line);
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
     }
 }

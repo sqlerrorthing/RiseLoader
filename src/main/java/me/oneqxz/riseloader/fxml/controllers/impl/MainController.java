@@ -28,7 +28,7 @@ public class MainController extends Controller {
         this.version = ((Text) root.lookup("#version"));
         this.riseVersion = ((Text) root.lookup("#riseReleaseVersion"));
 
-        this.riseVersion.setText(RiseInfo.getInstance().getClientInfo().getClientVersion());
+        this.riseVersion.setText(RiseInfo.getInstance().getClientInfo().getRelease().getVersion());
 
         this.home.setOnMouseClicked(event -> {
             MainScene.setCurrenViewPage(MainScene.Page.HOME);

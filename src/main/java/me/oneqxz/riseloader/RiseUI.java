@@ -9,6 +9,8 @@ import me.oneqxz.riseloader.fxml.components.impl.Loading;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.ClientInfo;
 import me.oneqxz.riseloader.rise.RiseInfo;
+import me.oneqxz.riseloader.rise.versions.PublicBeta;
+import me.oneqxz.riseloader.rise.versions.Release;
 import me.oneqxz.riseloader.settings.Settings;
 import me.oneqxz.riseloader.utils.OSUtils;
 import me.oneqxz.riseloader.utils.Version;
@@ -59,32 +61,49 @@ public class RiseUI extends Application {
             }
             if(resp.getStatusCode() == 200)
             {
-                log.info(resp.getStatusCode() + ", writing info");
-                JSONObject json = resp.getJSON();
+                try {
+                    log.info(resp.getStatusCode() + ", writing info");
+                    JSONObject json = resp.getJSON();
 
-                JSONObject files = json.getJSONObject("files");
-                JSONObject client = json.getJSONObject("client");
+                    JSONObject files = json.getJSONObject("files");
+                    JSONObject client = json.getJSONObject("client");
 
-                RiseInfo.createNew(
-                        files.getJSONObject("natives"),
-                        files.getJSONObject("java"),
-                        files.getJSONObject("rise"),
-                        new ClientInfo(client.getString("client_version"), client.getString("client_changelog"), client.getString("loader_version"))
-                );
+                    JSONObject versions = client.getJSONObject("versions");
 
-                Platform.runLater(() ->
+                    PublicBeta publicBeta = new PublicBeta(versions.getJSONObject("beta").getString("version"), versions.getJSONObject("beta").getLong("lastUpdated"));
+                    Release release = new Release(versions.getJSONObject("release").getString("version"), versions.getJSONObject("release").getLong("lastUpdated"));
+
+                    RiseInfo.createNew(
+                            files.getJSONObject("natives"),
+                            files.getJSONObject("java"),
+                            files.getJSONObject("rise"),
+                            new ClientInfo(publicBeta, release, client.getString("release_changelog"), client.getString("loader_version"))
+                    );
+
+                    Platform.runLater(() ->
+                    {
+                        try {
+                            Loading.close(loadingStage);
+                            MainScene.createScene(stage);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                }
+                catch (Exception e)
                 {
-                    try {
-                        Loading.close(loadingStage);
-                        MainScene.createScene(stage);
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+                    Platform.runLater(() -> {
+                        loadingStage.close();
+                        new ErrorBox().show(e);
+                    });
+                }
             }
             else
             {
-                throw new RuntimeException("/loader returned invalid status code, " + resp.getStatusCode());
+                Platform.runLater(() -> {
+                    loadingStage.close();
+                    new ErrorBox().show(new RuntimeException("/loader returned invalid status code"));
+                });
             }
         });
         thread.start();

@@ -1,20 +1,29 @@
 package me.oneqxz.riseloader.rise;
 
+import me.oneqxz.riseloader.rise.versions.IVersion;
+import me.oneqxz.riseloader.rise.versions.PublicBeta;
+import me.oneqxz.riseloader.rise.versions.Release;
+
 public class ClientInfo {
 
-    private String clientVersion;
     private String changelog;
     private String loaderVersion;
+    private IVersion publicBeta, release;
 
-    public ClientInfo(String clientVersion, String changelog, String loaderVersion)
+    public ClientInfo(PublicBeta publicBeta, Release release, String changelog, String loaderVersion)
     {
-        this.clientVersion = clientVersion;
+        this.publicBeta = publicBeta;
+        this.release = release;
         this.changelog = changelog;
         this.loaderVersion = loaderVersion;
     }
 
-    public String getClientVersion() {
-        return clientVersion;
+    public IVersion getPublicBeta() {
+        return publicBeta;
+    }
+
+    public IVersion getRelease() {
+        return release;
     }
 
     public String getChangelog() {

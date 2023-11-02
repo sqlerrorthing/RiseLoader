@@ -23,6 +23,8 @@ public class HomeController extends Controller {
     TextArea changelog;
     Button launchButton, versionsButton, versionBeta, versionRelease;
 
+    Text betaLastUpdated, releaseLastUpdated;
+
     Pane launchPane, versionsPane;
 
     @Override
@@ -38,8 +40,14 @@ public class HomeController extends Controller {
         launchPane = (Pane) root.lookup("#launchPane");
         versionsPane = (Pane) root.lookup("#versionsPane");
 
+        betaLastUpdated = (Text) root.lookup("#betaLastUpdated");
+        releaseLastUpdated = (Text) root.lookup("#releaseLastUpdated");
+
         changelog.setText(RiseInfo.getInstance().getClientInfo().getChangelog());
         launchButton.setText("Launch " + Settings.getSettings().getString("version"));
+
+        betaLastUpdated.setText(RiseInfo.getInstance().getClientInfo().getPublicBeta().getUpdateAgo());
+        releaseLastUpdated.setText(RiseInfo.getInstance().getClientInfo().getRelease().getUpdateAgo());
 
         versionsButton.setOnMouseClicked((event) ->
         {
