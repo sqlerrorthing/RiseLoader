@@ -6,6 +6,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.components.impl.Loading;
+import me.oneqxz.riseloader.fxml.components.impl.Updater;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.ClientInfo;
 import me.oneqxz.riseloader.rise.RiseInfo;
@@ -25,7 +26,7 @@ import java.io.IOException;
 public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
-    public static final Version version = new Version("1.0.0");
+    public static final Version version = new Version("1.0.1");
     public static final String serverIp = "http://riseloader.0x22.xyz";
 
     @Override
@@ -67,6 +68,28 @@ public class RiseUI extends Application {
 
                     JSONObject files = json.getJSONObject("files");
                     JSONObject client = json.getJSONObject("client");
+
+                    if(version.needToUpdate(client.getString("loader_version")))
+                    {
+                        log.info("New version detected! Updating...");
+                        try {
+                            Platform.runLater(() ->
+                            {
+                                Loading.close(loadingStage);
+                                try {
+                                    new Updater().show();
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
+                            return;
+                        }
+                        catch (Exception e)
+                        {
+                            new ErrorBox().show(e);
+                            e.printStackTrace();
+                        }
+                    }
 
                     JSONObject versions = client.getJSONObject("versions");
 

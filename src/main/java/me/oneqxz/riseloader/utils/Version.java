@@ -14,31 +14,26 @@ public class Version {
 
     public boolean needToUpdate(String newVersion)
     {
-        List<Integer> currentVersionList = getVersionList(version);
-        List<Integer> latestVersionList = getVersionList(newVersion);
+        String[] currentComponents = version.split("\\.");
+        String[] newComponents = newVersion.split("\\.");
 
-        int result = compareVersion(currentVersionList, latestVersionList);
-
-        if (result < 0) {
+        // Проверяем, совпадают ли первые три компоненты
+        if (currentComponents.length < 3 || newComponents.length < 3) {
             return false;
-        } else return result != 0;
-    }
+        }
 
-    private List<Integer> getVersionList(String version) {
-        return Arrays.stream(version.split("\\."))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
+        for (int i = 0; i < 3; i++) {
+            int current = Integer.parseInt(currentComponents[i]);
+            int newVer = Integer.parseInt(newComponents[i]);
 
-    private int compareVersion(List<Integer> currentVersion, List<Integer> latestVersion) {
-        int size = Math.min(currentVersion.size(), latestVersion.size());
-        for (int i = 0; i < size; i++) {
-            int cmp = currentVersion.get(i).compareTo(latestVersion.get(i));
-            if (cmp != 0) {
-                return cmp;
+            if (newVer > current) {
+                return true;
+            } else if (newVer < current) {
+                return false;
             }
         }
-        return Integer.compare(currentVersion.size(), latestVersion.size());
+
+        return false;
     }
 
     public String getVersion() {
