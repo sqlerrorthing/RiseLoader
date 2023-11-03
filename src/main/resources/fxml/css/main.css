@@ -1,9 +1,3 @@
-@font-face {
-    src: url('../fonts/Roboto-Black.ttf');
-    src: url('../fonts/Roboto-BlackItalic.ttf');
-    src: url('../fonts/Roboto-Medium.ttf');
-}
-
 .text
 {
     -fx-text-fill: white;

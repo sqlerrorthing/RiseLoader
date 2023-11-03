@@ -45,6 +45,7 @@ public class LaunchDebugController extends Controller {
         BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader stderrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
+
         this.copy.setOnMouseClicked((e) ->
         {
             StringSelection stringSelection = new StringSelection(logs.getText());
@@ -74,14 +75,14 @@ public class LaunchDebugController extends Controller {
                     String finalLine = line;
                     Platform.runLater(() ->
                     {
-                        logs.appendText("\n" + finalLine);
+                        logs.appendText((logs.getText().isEmpty() ? "" : "\n") + finalLine);
                     });
                 }
                 while ((line = stderrReader.readLine()) != null) {
                     String finalLine = line;
                     Platform.runLater(() ->
                     {
-                        logs.appendText("\n" + finalLine);
+                        logs.appendText((logs.getText().isEmpty() ? "" : "\n") + finalLine);
                     });
                 }
 
