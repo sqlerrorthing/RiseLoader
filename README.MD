@@ -10,6 +10,13 @@ A loader for client Rise (https://vantage.rip) by 1qxz ^_^
 ![Main](https://raw.githubusercontent.com/oneqxz/RiseLoader/master/screenshots/java_MSMuSIVlcI.png)
 
 ![Launching](https://raw.githubusercontent.com/oneqxz/RiseLoader/master/screenshots/java_KGUAI6HwoP.png)
+## Features
+
+- Fully automatic updates
+- Easy file management
+- Easy client startup
+- Open Source Code
+
 ## Supported on
 
 RiseLoader is supported on windows (7/8/10/11), Linux, macOS,
@@ -54,4 +61,8 @@ Main class
 ```bash
   me.oneqxz.riseloader.RiseLoaderMain
 ```
+## License
 
+GPLv3
+
+**Free Software, Hell Yeah!**
