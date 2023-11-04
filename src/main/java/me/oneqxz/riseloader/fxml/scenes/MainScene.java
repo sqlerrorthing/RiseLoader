@@ -10,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.FX;
+import me.oneqxz.riseloader.fxml.animations.CFadeInLeft;
 import me.oneqxz.riseloader.fxml.controllers.impl.MainController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.HomeController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.SettingsController;
@@ -67,7 +68,7 @@ public class MainScene {
 
         pageContent.getChildren().clear();
 
-        new FadeIn(pageParent).setSpeed(1.5).play();
+        new CFadeInLeft(pageParent).setSpeed(2).play();
         pageContent.getChildren().add(pageParent);
         System.gc();
     }

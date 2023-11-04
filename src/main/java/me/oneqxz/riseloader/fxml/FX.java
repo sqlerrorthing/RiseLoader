@@ -1,5 +1,8 @@
 package me.oneqxz.riseloader.fxml;
 
+import animatefx.animation.Bounce;
+import animatefx.animation.BounceIn;
+import animatefx.animation.FadeIn;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
@@ -55,6 +58,7 @@ public class FX {
     public static Scene createNewScene(String resource, Controller controller, Stage stage) throws IOException {
         Scene scene = new Scene(createNewParent(resource, controller, stage));
         scene.setFill(Color.TRANSPARENT);
+        new FadeIn(scene.getRoot()).play();
 
         logger.info("JavaFX scene will created with name " + resource);
         return scene;
