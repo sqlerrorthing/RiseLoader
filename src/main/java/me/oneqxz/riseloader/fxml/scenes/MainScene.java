@@ -1,9 +1,6 @@
 package me.oneqxz.riseloader.fxml.scenes;
 
-import animatefx.animation.BounceIn;
-import animatefx.animation.FadeIn;
-import animatefx.animation.FadeInDown;
-import animatefx.animation.FadeInUp;
+import animatefx.animation.*;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -35,6 +32,8 @@ public class MainScene {
         setCurrenViewPage(Page.HOME);
     }
 
+    private static Node homeNode, settingsNode;
+
     public static void setCurrenViewPage(Page page)
     {
         Button home = ((Button) scene.getRoot().lookup("#btnHome"));
@@ -45,19 +44,19 @@ public class MainScene {
         home.getStyleClass().remove("navButtonActive");
         settings.getStyleClass().remove("navButtonActive");
 
-        Parent pageParent = null;
+        Node pageParent = null;
         try
         {
             switch (page) {
                 case HOME ->
                 {
                     home.getStyleClass().add("navButtonActive");
-                    pageParent = FX.createNewParent("pages/home.fxml", new HomeController(), null);
+                    pageParent = homeNode == null ? homeNode = FX.createNewParent("pages/home.fxml", new HomeController(), null) : homeNode;
                 }
                 case SETTINGS ->
                 {
                     settings.getStyleClass().add("navButtonActive");
-                    pageParent = FX.createNewParent("pages/settings.fxml", new SettingsController(), null);
+                    pageParent = settingsNode == null ? settingsNode = FX.createNewParent("pages/settings.fxml", new SettingsController(), null) : settingsNode;
                 }
             }
         }

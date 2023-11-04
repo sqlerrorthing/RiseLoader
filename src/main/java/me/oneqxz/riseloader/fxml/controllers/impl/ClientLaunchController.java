@@ -23,7 +23,9 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Stream;
 
 public class ClientLaunchController extends Controller {
 
@@ -68,13 +70,14 @@ public class ClientLaunchController extends Controller {
             rootDir.mkdirs();
 
         status.setText("Starting checking files hash...");
-        int filesToCheck = info.getJava().keySet().size() + info.getNatives().keySet().size() + info.getRise().keySet().size();
+        String[] currentJava = info.getJava().keySet().stream().filter(s -> s.startsWith(OSUtils.getOS().name().toLowerCase())).toArray(String[]::new);
+        int filesToCheck = (int) (currentJava.length + info.getNatives().keySet().size() + info.getRise().keySet().size());
         AtomicInteger checkedFiles = new AtomicInteger();
         new Thread(() ->
         {
-            checkHashesOrDownload(info.getJava(), rootDir.getAbsolutePath(), "java", checkedFiles, filesToCheck);
-            checkHashesOrDownload(info.getNatives(), rootDir.getAbsolutePath(), "natives", checkedFiles, filesToCheck);
-            checkHashesOrDownload(info.getRise(), rootDir.getAbsolutePath(), "rise", checkedFiles, filesToCheck);
+            checkHashesOrDownload(currentJava, info.getJava(), rootDir.getAbsolutePath(), "java", checkedFiles, filesToCheck);
+            checkHashesOrDownload(info.getNatives().keySet().toArray(String[]::new), info.getNatives(), rootDir.getAbsolutePath(), "natives", checkedFiles, filesToCheck);
+            checkHashesOrDownload(info.getRise().keySet().toArray(String[]::new), info.getRise(), rootDir.getAbsolutePath(), "rise", checkedFiles, filesToCheck);
             checkAssets();
 
             if(!aborted)
@@ -92,52 +95,24 @@ public class ClientLaunchController extends Controller {
         }).start();
     }
 
-    private void checkHashesOrDownload(JSONObject object, String root, String sub, AtomicInteger checkedFiles, int filesToCheck)
+    private void checkHashesOrDownload(String[] object, JSONObject j, String root, String sub, AtomicInteger checkedFiles, int filesToCheck)
     {
 
-        for (String filePath : object.keySet())
+        for (String filePath : object)
         {
             if(aborted)
                 return;
 
-            if(sub.equals("java"))
-            {
-                if(OSUtils.getOS() == OSUtils.OS.WINDOWS)
-                {
-                    if(!filePath.startsWith("windows"))
-                    {
-                        checkedFiles.getAndIncrement();
-                        continue;
-                    }
-                }
-                else if(OSUtils.getOS() == OSUtils.OS.LINUX)
-                {
-                    if(!filePath.startsWith("linux"))
-                    {
-                        checkedFiles.getAndIncrement();
-                        continue;
-                    }
-                }
-                else if(OSUtils.getOS() == OSUtils.OS.MACOS)
-                {
-                    if(!filePath.startsWith("macos"))
-                    {
-                        checkedFiles.getAndIncrement();
-                        continue;
-                    }
-                }
-            }
-
             File file = new File(root, sub + "\\" + filePath);
             Platform.runLater(() -> {status.setText("Checking hash for " + file.getName());});
-            String hash = object.getString(filePath);
+            String hash = j.getString(filePath);
             if(!checkFileHash(file, hash))
             {
                 Platform.runLater(() ->
                 {
                     status.setText("Downloading file " + file.getName());
                     subProgress.setVisible(true);
-                    subProgress.setProgress(0);
+                    subProgress.setProgress(-1);
                 });
                 downloadFile(RiseUI.serverIp + "/file/"+sub+"/" + filePath.replace("\\", "/"), file.getAbsolutePath());
                 Platform.runLater(() ->

@@ -39,7 +39,7 @@ public class RunClient {
         } catch (Exception x) {
             x.printStackTrace();
             MainScene.closeSelf();
-            new ErrorBox().show(x);
+            Platform.runLater(() -> new ErrorBox().show(x, false));
         }
         try
         {

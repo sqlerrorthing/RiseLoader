@@ -6,6 +6,7 @@ import me.oneqxz.riseloader.RiseLoaderMain;
 import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
+import me.oneqxz.riseloader.utils.OSUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -96,8 +97,12 @@ public class UpdatingController extends Controller {
     }
 
     private void restartApplication() throws IOException, URISyntaxException {
-        String javaCommand = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        String[] cmd = {javaCommand, "-jar", new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getAbsolutePath()};
+        String java = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        if(OSUtils.getOS() == OSUtils.OS.WINDOWS)
+            if(new File("C:\\Program Files\\Zulu\\zulu-17-jre\\bin\\java.exe").exists())
+                java = "C:\\Program Files\\Zulu\\zulu-17-jre\\bin\\java.exe";
+
+        String[] cmd = {java, "-jar", new File(this.getClass().getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getAbsolutePath()};
 
         ProcessBuilder processBuilder = new ProcessBuilder(cmd);
         processBuilder.start();
