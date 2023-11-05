@@ -14,7 +14,7 @@ import java.net.URI;
 
 public class MainController extends Controller {
 
-    Button home, settings;
+    Button home, settings, scripts;
     Text version, riseVersion;
     Rectangle background;
 
@@ -22,6 +22,7 @@ public class MainController extends Controller {
     protected void init() {
         this.home = ((Button) root.lookup("#btnHome"));
         this.settings = ((Button) root.lookup("#btnSettings"));
+        this.scripts = ((Button) root.lookup("#btnScripts"));
 
         this.background = ((Rectangle) root.lookup("#background"));
 
@@ -36,6 +37,10 @@ public class MainController extends Controller {
 
         this.settings.setOnMouseClicked(event -> {
             MainScene.setCurrenViewPage(MainScene.Page.SETTINGS);
+        });
+
+        this.scripts.setOnMouseClicked(event -> {
+            MainScene.setCurrenViewPage(MainScene.Page.SCRIPTS);
         });
 
         Image bg = new Image("/background.jpg");

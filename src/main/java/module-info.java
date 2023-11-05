@@ -14,6 +14,7 @@ module me.oneqxz.riseloader {
     requires org.apache.commons.io;
     requires org.apache.commons.compress;
     requires net.hycrafthd.minecraft_authenticator;
+    requires javafx.media;
 
     opens me.oneqxz.riseloader to javafx.fxml;
     exports me.oneqxz.riseloader;

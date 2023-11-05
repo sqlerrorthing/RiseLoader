@@ -38,9 +38,104 @@
 
 
 .check-box:hover .box > .mark {
-    -fx-background-color: transparent; /* Замените на желаемый цвет галочки при наведении */
+    -fx-background-color: transparent;
 }
 
 .check-box:selected .box > .mark {
     -fx-background-color: white;
 }
+
+.scroll-pane > .cornear
+{
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane
+{
+    -fx-background-color: transparent;
+    -fx-hbar-policy: never;
+}
+
+.scroll-bar
+{
+    -fx-arrows-visible: hidden;
+}
+
+.scroll-bar .thumb
+{
+    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-padding: 0;
+    -fx-background-radius: 3;
+}
+
+.scroll-pane > .scroll-bar:horizontal > .increment-button,
+.scroll-pane > .scroll-bar:horizontal > .decrement-button {
+    -fx-padding: 0 3px 0 3px;
+}
+.scroll-pane > .scroll-bar:vertical > .increment-button,
+.scroll-pane > .scroll-bar:vertical > .decrement-button {
+    -fx-padding: 0 3px 0 3px;
+}
+.scroll-bar > .increment-button,
+.scroll-bar > .decrement-button {
+    -fx-padding: 0 3px 0 3px;
+}
+
+.scroll-bar:horizontal > .increment-button,
+.scroll-bar:horizontal > .decrement-button {
+    -fx-background-insets: 0 0 0 0 , 0 0 0 0, 0 0 0 0, 0 0 0 0 0;
+}
+.scroll-bar:vertical > .increment-button,
+.scroll-bar:vertical > .decrement-button {
+    -fx-background-insets: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+}
+
+.scroll-bar:horizontal > .decrement-button > .decrement-arrow {
+    -fx-padding: 0 3px 0 3px;
+}
+.scroll-bar:horizontal > .increment-button > .increment-arrow {
+    -fx-padding: 0 3px 0 3px;
+}
+.scroll-bar:vertical > .decrement-button > .decrement-arrow {
+    -fx-padding: 0 3px 0 3px;
+}
+.scroll-bar:vertical > .increment-button > .increment-arrow {
+    -fx-padding: 0 3px 0 3px;
+}
+
+.scroll-bar:vertical
+{
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal{
+    -fx-background-color: transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:vertical .track
+{
+
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px;
+}
+
+

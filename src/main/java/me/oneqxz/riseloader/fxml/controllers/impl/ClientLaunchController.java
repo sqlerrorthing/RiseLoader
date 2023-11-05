@@ -9,7 +9,10 @@ import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.RiseInfo;
+import me.oneqxz.riseloader.rise.pub.PublicInstance;
+import me.oneqxz.riseloader.rise.pub.interfaces.IPublicData;
 import me.oneqxz.riseloader.rise.run.RunClient;
+import me.oneqxz.riseloader.settings.Settings;
 import me.oneqxz.riseloader.utils.OSUtils;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
@@ -21,8 +24,11 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
@@ -71,13 +77,14 @@ public class ClientLaunchController extends Controller {
 
         status.setText("Starting checking files hash...");
         String[] currentJava = info.getJava().keySet().stream().filter(s -> s.startsWith(OSUtils.getOS().name().toLowerCase())).toArray(String[]::new);
-        int filesToCheck = (int) (currentJava.length + info.getNatives().keySet().size() + info.getRise().keySet().size());
+        int filesToCheck = (int) (currentJava.length + info.getNatives().keySet().size() + info.getRise().keySet().size() + Settings.getSettings().getStringList("rise.scripts.enabled").size());
         AtomicInteger checkedFiles = new AtomicInteger();
         new Thread(() ->
         {
             checkHashesOrDownload(currentJava, info.getJava(), rootDir.getAbsolutePath(), "java", checkedFiles, filesToCheck);
             checkHashesOrDownload(info.getNatives().keySet().toArray(String[]::new), info.getNatives(), rootDir.getAbsolutePath(), "natives", checkedFiles, filesToCheck);
             checkHashesOrDownload(info.getRise().keySet().toArray(String[]::new), info.getRise(), rootDir.getAbsolutePath(), "rise", checkedFiles, filesToCheck);
+            checkAndDownloadScripts(checkedFiles, filesToCheck);
             checkAssets();
 
             if(!aborted)
@@ -93,6 +100,53 @@ public class ClientLaunchController extends Controller {
                 RunClient.run(root);
             }
         }).start();
+    }
+
+    private void checkAndDownloadScripts(AtomicInteger checkedFiles, int filesToCheck)
+    {
+        List<String> scripts = Settings.getSettings().getStringList("rise.scripts.enabled");
+        Platform.runLater(() -> status.setText("Starting check scripts..."));
+
+        for(String script : scripts)
+        {
+//            File scriptFile = new File(OSUtils.getRiseFolder().toFile(), "run\\Rise\\scripts\\riseloader_" + script.toLowerCase() + ".js");
+            File scriptFile = Paths.get(OSUtils.getRiseFolder().toFile().getAbsolutePath(), "run", "Rise", "scripts", "riseloader_" + script.toLowerCase() + ".js").toFile();
+            scriptFile.getParentFile().mkdirs();
+
+            IPublicData scriptData = Arrays.stream(PublicInstance.getInstance().getScripts().getData()).filter(d -> d.getName().equals(script)).findFirst().orElse(null);
+
+            Platform.runLater(() ->
+            {
+                status.setText("Checking script " + script);
+            });
+
+            if(scriptData != null)
+            {
+                if(!checkFileHash(scriptFile, scriptData.getFileData().getMD5()))
+                {
+                    Platform.runLater(() ->
+                    {
+                        status.setText("Downloading script " + script);
+                        subProgress.setVisible(true);
+                        subProgress.setProgress(-1);
+                    });
+                    downloadFile(RiseUI.serverIp + "/scripts/dl/" + scriptData.getFileData().getDownloadURL(), scriptFile.getAbsolutePath());
+                    Platform.runLater(() ->
+                    {
+                        subProgress.setVisible(false);
+                    });
+                }
+            }
+            else
+            {
+                Platform.runLater(() -> {
+                    status.setText("Can't get script "+scriptFile+" data ");
+                    checkedFiles.getAndIncrement();
+                });
+            }
+
+//            if(!checkFileHash(scriptFile, PublicInstance.getInstance().getScripts().getData().))
+        }
     }
 
     private void checkHashesOrDownload(String[] object, JSONObject j, String root, String sub, AtomicInteger checkedFiles, int filesToCheck)

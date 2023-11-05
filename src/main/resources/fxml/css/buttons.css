@@ -78,3 +78,26 @@
 {
     -fx-background-color: #ce3b3b;
 }
+
+.grayButton
+{
+    -fx-background-color: rgba(0, 0, 0, 0.2);
+}
+
+.grayButton:hover
+{
+    -fx-background-color: rgba(0, 0, 0, 0.4);
+}
+
+.activatedButton
+{
+    -fx-background-color: rgba(121, 44, 157, 0.6) !important;
+}
+
+.activeButton
+{
+    -fx-background-color: rgba(0, 0, 0, 0.3);
+    -fx-border-color: #9e3bce;
+    -fx-border-width: 0 0 2 0;
+    -fx-border-style: solid;
+}

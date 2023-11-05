@@ -10,6 +10,7 @@ import org.bspfsystems.yamlconfiguration.serialization.ConfigurationSerializable
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputFilter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -41,6 +42,8 @@ public class Settings {
         setDefault("version", "release");
 
         setDefault("others.javaoptimize", true);
+
+        setDefault("rise.scripts.enabled", new ArrayList<String>());
 
         saveConfig();
     }

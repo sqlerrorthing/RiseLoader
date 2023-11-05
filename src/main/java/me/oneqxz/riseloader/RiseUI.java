@@ -10,6 +10,7 @@ import me.oneqxz.riseloader.fxml.components.impl.Updater;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.ClientInfo;
 import me.oneqxz.riseloader.rise.RiseInfo;
+import me.oneqxz.riseloader.rise.pub.PublicInstance;
 import me.oneqxz.riseloader.rise.versions.PublicBeta;
 import me.oneqxz.riseloader.rise.versions.Release;
 import me.oneqxz.riseloader.settings.Settings;
@@ -26,7 +27,7 @@ import java.io.IOException;
 public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
-    public static final Version version = new Version("1.0.1");
+    public static final Version version = new Version("1.0.2");
     public static final String serverIp = "http://riseloader.0x22.xyz";
 
     @Override
@@ -45,7 +46,9 @@ public class RiseUI extends Application {
 
         Thread thread = new Thread(() ->
         {
+            PublicInstance.getInstance();
             Settings.getSettings();
+
             log.info("Getting Rise information...");
             Response resp = null;
             try {
