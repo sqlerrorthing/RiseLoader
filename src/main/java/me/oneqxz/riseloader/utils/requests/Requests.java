@@ -14,6 +14,7 @@ public class Requests {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36");
+        connection.setRequestProperty("riseloader-ca-qlp-cls", "KQbfEfRyHoukC3nqUu5cMZYk98D03s8cycbi9360M54RNjvpw69pYBVaSFD");
 
         int responseCode = connection.getResponseCode();
 

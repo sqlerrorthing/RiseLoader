@@ -7,7 +7,7 @@ public interface IFileData {
 
     @NotNull String getDownloadURL();
     @NotNull String getMD5();
-    @NotNull long created();
+    long created();
 
     default String lastUploaded()
     {

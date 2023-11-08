@@ -13,8 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.UUID;
-
 public class Scripts implements IPublic {
 
     private IPublicData[] data;
@@ -51,7 +49,7 @@ public class Scripts implements IPublic {
                                 public @NotNull String getMD5() {
                                     return script.getJSONObject("download").getString("md5");
                                 }
-                                public @NotNull long created() {
+                                public long created() {
                                     return script.getJSONObject("download").getLong("created");
                                 }
                             };

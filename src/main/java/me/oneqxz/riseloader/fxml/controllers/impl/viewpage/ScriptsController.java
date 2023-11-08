@@ -177,16 +177,6 @@ public class ScriptsController extends Controller {
             preview.setFitHeight(Math.min(image.getHeight(), 400));
             preview.setPreserveRatio(true);
 
-//            preview.layoutXProperty().setValue((this.root.getBoundsInParent().getWidth() / 2) - (preview.getBoundsInParent().getWidth() / 2));
-//            preview.layoutYProperty().setValue((this.root.getBoundsInParent().getHeight() / 2) - (preview.getBoundsInParent().getHeight() / 2));
-
-//            double aspectRatio = image.getWidth() / image.getHeight();
-//            double realWidth = Math.min(preview.getFitWidth(), preview.getFitWidth());
-//            double realHeight = Math.min(preview.getFitHeight(), preview.getFitWidth() / aspectRatio);
-//
-//            preview.setLayoutX((root.getBoundsInParent().getWidth() - realWidth) / 2);
-//            preview.setLayoutY((root.getBoundsInParent().getHeight() - realHeight) / 2);
-
             preview.setOnMouseClicked((e) ->
             {
                 MainScene.removeChildren(this.root);

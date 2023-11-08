@@ -27,7 +27,7 @@ import java.io.IOException;
 public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
-    public static final Version version = new Version("1.0.2");
+    public static final Version version = new Version("1.0.3");
     public static final String serverIp = "http://riseloader.0x22.xyz";
 
     @Override
