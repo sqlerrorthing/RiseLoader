@@ -158,8 +158,11 @@ public class RunClient {
         catch (Exception e)
         {
             e.printStackTrace();
-            MainScene.closeSelf();
-            new ErrorBox().show(e);
+            Platform.runLater(() ->
+            {
+                MainScene.closeSelf();
+                new ErrorBox().show(e);
+            });
         }
     }
 

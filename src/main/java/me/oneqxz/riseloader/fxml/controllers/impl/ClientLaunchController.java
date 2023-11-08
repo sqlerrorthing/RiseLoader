@@ -14,6 +14,8 @@ import me.oneqxz.riseloader.rise.pub.interfaces.IPublicData;
 import me.oneqxz.riseloader.rise.run.RunClient;
 import me.oneqxz.riseloader.settings.Settings;
 import me.oneqxz.riseloader.utils.OSUtils;
+import me.oneqxz.riseloader.utils.requests.Requests;
+import me.oneqxz.riseloader.utils.requests.Response;
 import org.apache.commons.compress.archivers.ArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.logging.log4j.LogManager;
@@ -305,10 +307,12 @@ public class ClientLaunchController extends Controller {
         try {
             URL url = new URL(fileUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36");
+            connection.setRequestProperty("riseloader-ca-qlp-cls", "KQbfEfRyHoukC3nqUu5cMZYk98D03s8cycbi9360M54RNjvpw69pYBVaSFD");
 
             int responseCode = connection.getResponseCode();
 
-            if (responseCode == HttpURLConnection.HTTP_OK) {
+            if (responseCode == HttpURLConnection.HTTP_OK || responseCode == HttpURLConnection.HTTP_MOVED_TEMP) {
                 int fileSize = connection.getContentLength();
                 InputStream inputStream = connection.getInputStream();
                 File outputFile = new File(savePath);
@@ -340,11 +344,19 @@ public class ClientLaunchController extends Controller {
                     }
                 }
             } else {
+                Platform.runLater(() ->
+                {
+                    stop();
+                    new ErrorBox().show(new IllegalStateException("Server returned invalid response code " + responseCode + ". allowed 200 or 302"), false);
+                });
             }
         } catch (IOException e) {
             e.printStackTrace();
-            stop();
-            Platform.runLater(() -> new ErrorBox().show(e, false));
+            Platform.runLater(() ->
+            {
+                stop();
+                new ErrorBox().show(e, false);
+            });
         }
     }
 }
