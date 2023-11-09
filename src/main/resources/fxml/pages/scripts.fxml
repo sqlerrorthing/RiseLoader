@@ -12,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane prefHeight="382.0" prefWidth="618.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@../css/buttons.css" />
@@ -39,7 +38,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Pane fx:id="loadingScripts" layoutX="12.0" layoutY="53.0" prefHeight="317.0" prefWidth="287.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+                  <Pane fx:id="loadingScripts" layoutX="12.0" layoutY="53.0" prefHeight="317.0" prefWidth="287.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;" visible="false">
                      <children>
                         <Text fill="WHITE" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loading..." textAlignment="CENTER" wrappingWidth="287.0">
                            <font>
@@ -53,11 +52,15 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <ScrollPane fx:id="scriptsPane" layoutX="12.0" layoutY="53.0" prefHeight="317.0" prefWidth="287.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;" visible="false">
-                     <content>
-                        <VBox fx:id="scriptsVBOX" prefHeight="20.0" prefWidth="287.0" />
-                     </content>
-                  </ScrollPane>
+                  <Pane fx:id="scriptsPane" layoutX="12.0" layoutY="53.0" prefHeight="317.0" prefWidth="287.0" style="-fx-background-radius: 6; -fx-background-color: rgba(0, 0, 0, 0.2);">
+                     <children>
+                        <ScrollPane fx:id="scriptsScrollPane" prefHeight="317.0" prefWidth="287.0">
+                           <content>
+                              <VBox fx:id="scriptsVBOX" prefHeight="20.0" prefWidth="287.0" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                  </Pane>
                </children>
             </Pane>
             <Pane fx:id="paneSelectCurrentScript" layoutX="309.0" prefHeight="382.0" prefWidth="309.0" visible="false">

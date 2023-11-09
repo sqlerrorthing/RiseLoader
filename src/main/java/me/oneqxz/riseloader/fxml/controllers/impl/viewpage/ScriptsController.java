@@ -37,7 +37,9 @@ public class ScriptsController extends Controller {
     protected Button reloadScripts;
     protected TextField searchScripts;
     protected Pane loadingScripts, paneCurrentScript, paneSelectCurrentScript;
-    protected ScrollPane scriptsPane;
+    protected Pane scriptsPane;
+    protected ScrollPane scriptsScrollPane;
+
     protected VBox scriptsBOX;
     protected SimpleObjectProperty<CurrentScriptController> currentSelectedScript = new SimpleObjectProperty<>();
 
@@ -47,12 +49,14 @@ public class ScriptsController extends Controller {
         searchScripts = (TextField) root.lookup("#searchScripts");
 
         loadingScripts = (Pane) root.lookup("#loadingScripts");
-        scriptsPane = (ScrollPane) root.lookup("#scriptsPane");
+        scriptsPane = (Pane) root.lookup("#scriptsPane");
+
+        scriptsScrollPane = (ScrollPane) root.lookup("#scriptsScrollPane");
 
         paneCurrentScript = (Pane) root.lookup("#paneCurrentScript");
         paneSelectCurrentScript = (Pane) root.lookup("#paneSelectCurrentScript");
 
-        scriptsBOX = (VBox) scriptsPane.getContent();
+        scriptsBOX = (VBox) scriptsScrollPane.getContent();
 
         reloadScripts.setOnMouseClicked((e) ->
         {
@@ -87,7 +91,6 @@ public class ScriptsController extends Controller {
     private void updateScripts()
     {
         activateLoadingScripts();
-        currentSelectedScript.setValue(null);
 
         for(IPublicData scriptData : PublicInstance.getInstance().getScripts().getData())
         {
@@ -109,6 +112,11 @@ public class ScriptsController extends Controller {
     {
         scriptsPane.setVisible(false);
         scriptsBOX.getChildren().clear();
+
+        currentSelectedScript.setValue(null);
+        paneCurrentScript.getChildren().clear();
+        paneCurrentScript.setVisible(false);
+        paneSelectCurrentScript.setVisible(true);
 
         loadingScripts.setVisible(true);
 
