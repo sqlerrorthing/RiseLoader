@@ -7,6 +7,7 @@ import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.utils.OSUtils;
+import me.oneqxz.riseloader.utils.requests.Requests;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -50,6 +51,7 @@ public class UpdatingController extends Controller {
     private void downloadUpdate(String updateURL, String tempFilePath) throws IOException {
         URL url = new URL(updateURL);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        Requests.setHeaders(connection);
         try (InputStream in = connection.getInputStream();
              FileOutputStream out = new FileOutputStream(tempFilePath)) {
             byte[] buffer = new byte[4096];
