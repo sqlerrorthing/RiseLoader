@@ -2,7 +2,7 @@
 
 A loader for client Rise (https://vantage.rip) by 1qxz ^_^
 
-!!! THIS IS NOT THE OFFICIAL LOWADER!!! THIS LOWADER WAS MADE ON PURE ENTHUSIASM !!!
+!!! THIS IS NOT THE OFFICIAL LOADER!!! THIS LOADER WAS MADE ON PURE ENTHUSIASM !!!
 ## Screenshots
 
 ![Loading](https://raw.githubusercontent.com/oneqxz/RiseLoader/master/screenshots/umpBSFGix2.png)
