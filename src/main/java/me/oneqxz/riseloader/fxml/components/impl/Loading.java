@@ -1,5 +1,7 @@
 package me.oneqxz.riseloader.fxml.components.impl;
 
+import javafx.application.Platform;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
@@ -11,6 +13,8 @@ import me.oneqxz.riseloader.fxml.controllers.Controller;
 import java.io.IOException;
 
 public class Loading extends Component {
+
+    private Stage curr;
 
     @Override
     public Stage show(Object... args) throws IOException {
@@ -24,7 +28,22 @@ public class Loading extends Component {
         });
         FX.setMinimizeAndClose(stage, "minimizeBtn", "closeBtn", (boolean) args[0]);
         FX.setDraggable(stage.getScene(), "riseLogo");
-        return stage;
+        return curr = stage;
     }
 
+    public void setStageTextLater(String text)
+    {
+        if(curr == null)
+            return;
+
+        Platform.runLater(() -> ((Label) curr.getScene().lookup("#stage")).setText(text));
+    }
+
+    public void setStageText(String text)
+    {
+        if(curr == null)
+            return;
+
+        ((Label) curr.getScene().lookup("#stage")).setText(text);
+    }
 }

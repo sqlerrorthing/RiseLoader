@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import me.oneqxz.riseloader.elua.Elua;
+import me.oneqxz.riseloader.fxml.components.impl.EluaAccept;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.components.impl.Loading;
 import me.oneqxz.riseloader.fxml.components.impl.Updater;
@@ -27,12 +29,27 @@ import java.io.IOException;
 public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
-    public static final Version version = new Version("1.0.4");
+    public static final Version version = new Version("1.0.5");
     public static final String serverIp = "http://riseloader.0x22.xyz";
 
     @Override
     public void start(Stage stage) throws IOException {
-        Stage loadingStage = new Loading().show(true);
+        if(!Elua.getElua().isEluaAccepted())
+        {
+            new EluaAccept(() -> {try{load(stage);}catch (Exception e){e.printStackTrace();System.exit(0);}}).show();
+        }
+        else
+        {
+            load(stage);
+        }
+    }
+
+    private void load(Stage stage) throws IOException
+    {
+        Loading loading = new Loading();
+        Stage loadingStage = loading.show(true);
+
+        loading.setStageText("Detecting os");
         if(OSUtils.getOS() == OSUtils.OS.UNDEFINED)
         {
             log.info("Cannot detect OS!");
@@ -46,9 +63,13 @@ public class RiseUI extends Application {
 
         Thread thread = new Thread(() ->
         {
+            loading.setStageTextLater("Fetching scripts");
             PublicInstance.getInstance();
+
+            loading.setStageTextLater("Parsing settings");
             Settings.getSettings();
 
+            loading.setStageTextLater("Fetching rise files");
             log.info("Getting Rise information...");
             Response resp = null;
             try {
@@ -66,6 +87,7 @@ public class RiseUI extends Application {
             if(resp.getStatusCode() == 200)
             {
                 try {
+                    loading.setStageTextLater("Parsing rise files");
                     log.info(resp.getStatusCode() + ", writing info");
                     JSONObject json = resp.getJSON();
 
@@ -74,6 +96,7 @@ public class RiseUI extends Application {
 
                     if(version.needToUpdate(client.getString("loader_version")))
                     {
+                        loading.setStageTextLater("Updating...");
                         log.info("New version detected! Updating...");
                         try {
                             Platform.runLater(() ->
@@ -97,7 +120,9 @@ public class RiseUI extends Application {
                     JSONObject versions = client.getJSONObject("versions");
 
                     PublicBeta publicBeta = new PublicBeta(versions.getJSONObject("beta").getString("version"), versions.getJSONObject("beta").getLong("lastUpdated"));
+                    loading.setStageTextLater("Parsed Public beta version");
                     Release release = new Release(versions.getJSONObject("release").getString("version"), versions.getJSONObject("release").getLong("lastUpdated"));
+                    loading.setStageTextLater("Parsed Release version");
 
                     RiseInfo.createNew(
                             files.getJSONObject("natives"),
@@ -106,6 +131,7 @@ public class RiseUI extends Application {
                             new ClientInfo(publicBeta, release, client.getString("release_changelog"), client.getString("loader_version"))
                     );
 
+                    loading.setStageTextLater("Finalizing...");
                     Platform.runLater(() ->
                     {
                         try {

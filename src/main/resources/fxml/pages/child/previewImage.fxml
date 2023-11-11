@@ -11,6 +11,6 @@
       <URL value="@../../css/launching.css" />
    </stylesheets>
    <children>
-      <ImageView fx:id="previewImage" fitHeight="402.0" fitWidth="719.0" layoutX="44.0" layoutY="39.0" pickOnBounds="true" x="5.0" />
+      <ImageView fx:id="previewImage" fitHeight="402.0" fitWidth="719.0" layoutX="-5.0" pickOnBounds="true" x="5.0" />
    </children>
 </Pane>

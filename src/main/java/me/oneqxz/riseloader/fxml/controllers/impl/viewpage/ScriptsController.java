@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -26,6 +27,7 @@ import me.oneqxz.riseloader.utils.OSUtils;
 import me.oneqxz.riseloader.utils.requests.Requests;
 import me.oneqxz.riseloader.utils.requests.Response;
 
+import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -169,21 +171,26 @@ public class ScriptsController extends Controller {
     private class ImagePreview extends Controller
     {
 
-        private Image image;
+        private ImageView imageView;
+        private ImageView preview;
 
-        public ImagePreview(Image image)
+        public ImagePreview(ImageView imageView)
         {
-            this.image = image;
+            this.imageView = imageView;
         }
 
         @Override
         protected void init() {
-            ImageView preview = (ImageView) root.lookup("#previewImage");
-            preview.setImage(image);
+            preview = (ImageView) root.lookup("#previewImage");
 
-            preview.setFitWidth(image.getWidth());
-            preview.setFitHeight(Math.min(image.getHeight(), 400));
             preview.setPreserveRatio(true);
+
+            setImageAndBounds(imageView.getImage());
+
+            imageView.imageProperty().addListener((o, oldValue, newValue) ->
+            {
+                setImageAndBounds(newValue);
+            });
 
             preview.setOnMouseClicked((e) ->
             {
@@ -196,6 +203,24 @@ public class ScriptsController extends Controller {
             });
         }
 
+        private void setImageAndBounds(Image image)
+        {
+            preview.setImage(image);
+
+            preview.setFitWidth(Math.min(image.getWidth(), 719));
+            preview.setFitHeight(Math.min(image.getHeight(), 400));
+
+            double aspectRatio = preview.getImage().getWidth() / preview.getImage().getHeight();
+            double realWidth = Math.min(preview.getFitWidth(), preview.getFitHeight() * aspectRatio);
+            double realHeight = Math.min(preview.getFitHeight(), preview.getFitWidth() / aspectRatio);
+
+            Rectangle2D imgBounds = new Rectangle2D.Double(0, 0, realWidth, realHeight);
+
+            this.preview.setLayoutX((((Pane) this.root).getPrefWidth() - imgBounds.getWidth()) / 2);
+            this.preview.setLayoutY((((Pane) this.root).getPrefHeight() - imgBounds.getHeight()) / 2);
+
+
+        }
     }
 
     private class CurrentScriptController extends Controller
@@ -245,8 +270,8 @@ public class ScriptsController extends Controller {
                 preview.setOnMouseClicked((e) ->
                 {
                     try {
-                        Parent previewParent = FX.createNewParent("pages/child/previewImage.fxml", new ImagePreview(preview.getImage()), null);
-                        new FadeIn(previewParent).play();
+                        Parent previewParent = FX.createNewParent("pages/child/previewImage.fxml", new ImagePreview(preview), null);
+                        new FadeIn(previewParent).setSpeed(2).play();
                         MainScene.addChildren(previewParent);
                     } catch (IOException ex) {
                         ex.printStackTrace();
