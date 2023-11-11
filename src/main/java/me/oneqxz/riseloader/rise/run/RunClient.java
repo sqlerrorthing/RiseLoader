@@ -28,7 +28,7 @@ public class RunClient {
 
         List<URL> urls = new ArrayList<>();
         try {
-            File[] jars = new File(rootFolder, "rise\\" + Settings.getSettings().getString("version", "release")).listFiles(pathname -> pathname.getName().endsWith(".jar"));
+            File[] jars = new File(rootFolder, "rise\\" + Settings.getSettings().getString("rise.version", "release")).listFiles(pathname -> pathname.getName().endsWith(".jar"));
             for (int i = 0; i < Objects.requireNonNull(jars).length; i++)
                 urls.add(jars[i].toURI().toURL());
 
@@ -43,7 +43,7 @@ public class RunClient {
         }
         try
         {
-            log.info("Version: "+Settings.getSettings().getString("version")+", Client running...");
+            log.info("Version: "+Settings.getSettings().getString("rise.version")+", Client running...");
 
             StringBuilder classpath = new StringBuilder();
             classpath.append("\"");

@@ -44,7 +44,7 @@ public class HomeController extends Controller {
         releaseLastUpdated = (Text) root.lookup("#releaseLastUpdated");
 
         changelog.setText(RiseInfo.getInstance().getClientInfo().getChangelog());
-        launchButton.setText("Launch " + Settings.getSettings().getString("version"));
+        launchButton.setText("Launch " + Settings.getSettings().getString("rise.version"));
 
         betaLastUpdated.setText(RiseInfo.getInstance().getClientInfo().getPublicBeta().getUpdateAgo());
         releaseLastUpdated.setText(RiseInfo.getInstance().getClientInfo().getRelease().getUpdateAgo());
@@ -56,14 +56,14 @@ public class HomeController extends Controller {
 
         versionBeta.setOnMouseClicked((event) ->
         {
-            Settings.getSettings().set("version", "beta");
+            Settings.getSettings().set("rise.version", "beta");
             launchButton.setText("Launch beta");
             showLaunch();
         });
 
         versionRelease.setOnMouseClicked((event) ->
         {
-            Settings.getSettings().set("version", "release");
+            Settings.getSettings().set("rise.version", "release");
             launchButton.setText("Launch release");
             showLaunch();
         });

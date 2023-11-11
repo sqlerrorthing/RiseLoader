@@ -1,5 +1,7 @@
 package me.oneqxz.riseloader.utils.requests;
 
+import me.oneqxz.riseloader.RiseUI;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,8 +15,7 @@ public class Requests {
         URL url = new URL(serverUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
-        connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36");
-        connection.setRequestProperty("riseloader-ca-qlp-cls", "KQbfEfRyHoukC3nqUu5cMZYk98D03s8cycbi9360M54RNjvpw69pYBVaSFD");
+        setHeaders(connection);
 
         int responseCode = connection.getResponseCode();
 
@@ -37,5 +38,10 @@ public class Requests {
     }
 
 
+    public static void setHeaders(HttpURLConnection connection)
+    {
+        connection.setRequestProperty("rise-0x22", "0x22/8cycbi9360M54qUu5cMZYRNjvpw69pYBVaSFDKQbfEfRyHoukC3nqUu5");
+        connection.setRequestProperty("User-Agent", "0x22/" + RiseUI.version.getVersion());
+    }
 
 }

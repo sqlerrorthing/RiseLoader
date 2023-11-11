@@ -10,8 +10,6 @@ import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.RiseInfo;
 
-import java.net.URI;
-
 public class MainController extends Controller {
 
     Button home, settings, scripts;

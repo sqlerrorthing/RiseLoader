@@ -10,10 +10,7 @@ import org.bspfsystems.yamlconfiguration.serialization.ConfigurationSerializable
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputFilter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Settings {
 
@@ -39,11 +36,11 @@ public class Settings {
         setDefault("preferences.resolution.width", 854);
         setDefault("preferences.resolution.height", 480);
 
-        setDefault("version", "release");
+        setDefault("rise.version", "release");
 
         setDefault("others.javaoptimize", true);
 
-        setDefault("rise.scripts.enabled", new ArrayList<String>());
+        setDefault("rise.scripts.enabled", Arrays.stream(new String[]{"QuickPlay", "ItemUI", "NoJumpDelay", "BowTrajectories"}).toList());
 
         saveConfig();
     }

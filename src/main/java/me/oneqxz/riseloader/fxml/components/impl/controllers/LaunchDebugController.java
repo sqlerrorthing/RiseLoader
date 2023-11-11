@@ -8,18 +8,11 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
-import me.oneqxz.riseloader.utils.OSUtils;
-import org.apache.commons.io.IOUtils;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.*;
-import java.nio.file.*;
-import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 
 public class LaunchDebugController extends Controller {

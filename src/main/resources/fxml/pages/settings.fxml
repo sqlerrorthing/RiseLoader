@@ -68,7 +68,7 @@
                         </Pane>
                         <Pane layoutX="193.0" layoutY="47.0" prefHeight="29.0" prefWidth="59.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
                            <children>
-                              <TextField fx:id="screenWidth" alignment="CENTER" prefHeight="25.0" prefWidth="59.0" />
+                              <TextField fx:id="screenWidth" alignment="CENTER" layoutY="3.0" prefHeight="25.0" prefWidth="59.0" />
                            </children>
                         </Pane>
                         <Label fx:id="memorySelected111" alignment="CENTER" layoutX="252.0" layoutY="53.0" prefHeight="17.0" prefWidth="25.0" text="X" textFill="WHITE" />
