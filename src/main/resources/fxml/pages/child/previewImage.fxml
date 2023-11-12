@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="817.0" style="-fx-background-radius: 6; -fx-background-color: rgba(0, 0, 0, 0.6);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
@@ -12,5 +15,18 @@
    </stylesheets>
    <children>
       <ImageView fx:id="previewImage" fitHeight="402.0" fitWidth="719.0" layoutX="-5.0" pickOnBounds="true" x="5.0" />
+      <TextFlow fx:id="controlFlow" layoutX="14.0" layoutY="402.0" prefHeight="14.0" prefWidth="201.0" style="-fx-background-color: rgba(0, 0, 0, 0.4); -fx-background-radius: 0 0 6 6;" textAlignment="CENTER">
+         <children>
+            <Text fx:id="openInBrowser" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="grayTextOnHover" text="Open in browser" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="   " />
+            <Text fx:id="copyImage" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="grayTextOnHover" text="Copy to clipboard" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="4.0" left="2.0" right="2.0" top="2.0" />
+         </padding>
+      </TextFlow>
    </children>
 </Pane>

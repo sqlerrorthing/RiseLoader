@@ -6,8 +6,15 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -15,23 +22,28 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.FX;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.pub.PublicInstance;
+import me.oneqxz.riseloader.rise.pub.interfaces.IPublic;
 import me.oneqxz.riseloader.rise.pub.interfaces.IPublicData;
 import me.oneqxz.riseloader.settings.Settings;
 import me.oneqxz.riseloader.utils.OSUtils;
 import me.oneqxz.riseloader.utils.requests.Requests;
 import me.oneqxz.riseloader.utils.requests.Response;
 
+import java.awt.*;
 import java.awt.geom.Rectangle2D;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 public class ScriptsController extends Controller {
@@ -172,16 +184,25 @@ public class ScriptsController extends Controller {
     {
 
         private ImageView imageView;
+        private IPublicData data;
         private ImageView preview;
 
-        public ImagePreview(ImageView imageView)
+        private TextFlow controlFlow;
+        private Text openInBrowser, copyImage;
+
+        public ImagePreview(ImageView imageView, IPublicData data)
         {
             this.imageView = imageView;
+            this.data = data;
         }
 
         @Override
         protected void init() {
             preview = (ImageView) root.lookup("#previewImage");
+
+            controlFlow = (TextFlow) root.lookup("#controlFlow");
+            openInBrowser = (Text) root.lookup("#openInBrowser");
+            copyImage = (Text) root.lookup("#copyImage");
 
             preview.setPreserveRatio(true);
 
@@ -192,12 +213,37 @@ public class ScriptsController extends Controller {
                 setImageAndBounds(newValue);
             });
 
+            openInBrowser.setOnMouseClicked((e) ->
+            {
+                e.consume();
+
+                try
+                {
+                    Desktop desktop = Desktop.getDesktop();
+                    desktop.browse(new URI(RiseUI.serverIp + "/scripts/dl/" + data.getPreviewURL()));
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
+                }
+            });
+
+            copyImage.setOnMouseClicked((e) ->
+            {
+                e.consume();
+
+                Clipboard clipboard = Clipboard.getSystemClipboard();
+                ClipboardContent content = new ClipboardContent();
+                content.putImage(preview.getImage());
+                clipboard.setContent(content);
+            });
+
             preview.setOnMouseClicked((e) ->
             {
                 MainScene.removeChildren(this.root);
             });
 
-            this.root.setOnMouseClicked((e) ->
+            root.setOnMouseClicked((e) ->
             {
                 MainScene.removeChildren(this.root);
             });
@@ -214,12 +260,12 @@ public class ScriptsController extends Controller {
             double realWidth = Math.min(preview.getFitWidth(), preview.getFitHeight() * aspectRatio);
             double realHeight = Math.min(preview.getFitHeight(), preview.getFitWidth() / aspectRatio);
 
-            Rectangle2D imgBounds = new Rectangle2D.Double(0, 0, realWidth, realHeight);
+            this.preview.setLayoutX(((((Pane) this.root).getPrefWidth() - realWidth) / 2) - 5);
+            this.preview.setLayoutY(((((Pane) this.root).getPrefHeight() - realHeight) / 2));
 
-            this.preview.setLayoutX((((Pane) this.root).getPrefWidth() - imgBounds.getWidth()) / 2);
-            this.preview.setLayoutY((((Pane) this.root).getPrefHeight() - imgBounds.getHeight()) / 2);
-
-
+            this.controlFlow.setMaxWidth(realWidth + 2.5);
+            this.controlFlow.setLayoutX(((((Pane) this.root).getPrefWidth() - realWidth) / 2));
+            this.controlFlow.setLayoutY((((((Pane) this.root).getPrefHeight() / 2) + realHeight / 2)));
         }
     }
 
@@ -270,7 +316,7 @@ public class ScriptsController extends Controller {
                 preview.setOnMouseClicked((e) ->
                 {
                     try {
-                        Parent previewParent = FX.createNewParent("pages/child/previewImage.fxml", new ImagePreview(preview), null);
+                        Parent previewParent = FX.createNewParent("pages/child/previewImage.fxml", new ImagePreview(preview, scriptData), null);
                         new FadeIn(previewParent).setSpeed(2).play();
                         MainScene.addChildren(previewParent);
                     } catch (IOException ex) {

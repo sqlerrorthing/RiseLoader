@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 import me.oneqxz.riseloader.settings.Settings;
 import me.oneqxz.riseloader.utils.OSUtils;
 import org.apache.commons.io.FileUtils;

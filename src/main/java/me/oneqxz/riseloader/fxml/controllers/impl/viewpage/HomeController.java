@@ -11,6 +11,7 @@ import me.oneqxz.riseloader.fxml.FX;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.controllers.impl.ClientLaunchController;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.RiseInfo;
 import me.oneqxz.riseloader.settings.Settings;
@@ -29,6 +30,7 @@ public class HomeController extends Controller {
 
     @Override
     protected void init() {
+
         changelog = (TextArea) root.lookup("#changelog");
 
         launchButton = (Button) root.lookup("#launchButton");

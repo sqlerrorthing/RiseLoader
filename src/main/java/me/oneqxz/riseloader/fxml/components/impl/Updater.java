@@ -5,6 +5,7 @@ import me.oneqxz.riseloader.fxml.FX;
 import me.oneqxz.riseloader.fxml.components.Component;
 import me.oneqxz.riseloader.fxml.components.impl.controllers.ErrorBoxController;
 import me.oneqxz.riseloader.fxml.components.impl.controllers.UpdatingController;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 
 import java.io.IOException;
 
@@ -13,6 +14,7 @@ public class Updater extends Component {
     @Override
     public Stage show(Object... args) throws IOException {
         try {
+            DiscordRichPresence.getInstance().updateState("In Update...");
             Stage stage = new Stage();
             FX.showScene("RiseLoader updating...", "updating.fxml", stage, new UpdatingController());
             FX.setMinimizeAndClose(stage, "minimizeBtn", "closeBtn", true);

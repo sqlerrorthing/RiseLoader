@@ -5,6 +5,16 @@
     -fx-background-radius: 6;
 }
 
+.grayTextOnHover
+{
+    -fx-text-fill: white;
+}
+
+.grayTextOnHover:hover
+{
+    -fx-text-fill: rgba(255, 255, 255, 0.6);
+}
+
 .navButton:hover
 {
     -fx-background-color: linear-gradient(to top left, rgba(231, 121, 170, 0.5), rgba(231, 121, 170, 0.5));

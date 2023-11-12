@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 
 import java.awt.*;
@@ -28,6 +29,7 @@ public class LaunchDebugController extends Controller {
 
     @Override
     protected void init() {
+        DiscordRichPresence.getInstance().updateState("In game");
         this.logs = (TextArea) root.lookup("#logs");
 
         this.closeExitButton = (Button) root.lookup("#closeExitButton");
@@ -54,6 +56,7 @@ public class LaunchDebugController extends Controller {
             }
             else
             {
+                DiscordRichPresence.getInstance().updateState("In Home page");
                 MainScene.showSelf();
                 stage.close();
             }
@@ -84,6 +87,7 @@ public class LaunchDebugController extends Controller {
                 Platform.runLater(() ->
                 {
                     logs.appendText("\n\nProcess exit with status code: " + exitCode);
+                    DiscordRichPresence.getInstance().updateState("In Debug view");
                     this.closeExitButton.setText("Exit");
                     this.closeExitButton.getStyleClass().remove("dangerButton");
                     this.closeExitButton.getStyleClass().add("defaultButton");

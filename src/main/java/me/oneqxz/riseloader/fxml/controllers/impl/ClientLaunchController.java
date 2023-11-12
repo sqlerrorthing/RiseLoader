@@ -8,6 +8,7 @@ import me.oneqxz.riseloader.RiseLoaderMain;
 import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.RiseInfo;
 import me.oneqxz.riseloader.rise.pub.PublicInstance;
@@ -50,10 +51,12 @@ public class ClientLaunchController extends Controller {
     {
         aborted = true;
         MainScene.removeChildren(root);
+        DiscordRichPresence.getInstance().updateState("In Home page");
     }
 
     @Override
     protected void init() {
+        DiscordRichPresence.getInstance().updateState("Launching...");
         status = (Label) root.lookup("#status");
 
         cancel = (Button) root.lookup("#cancelRun");
@@ -82,6 +85,7 @@ public class ClientLaunchController extends Controller {
         String[] currentJava = info.getJava().keySet().stream().filter(s -> s.startsWith(OSUtils.getOS().name().toLowerCase())).toArray(String[]::new);
         int filesToCheck = (int) (currentJava.length + info.getNatives().keySet().size() + info.getRise().keySet().size() + Settings.getSettings().getStringList("rise.scripts.enabled").size());
         AtomicInteger checkedFiles = new AtomicInteger();
+
         new Thread(() ->
         {
             checkHashesOrDownload(currentJava, info.getJava(), rootDir.getAbsolutePath(), "java", checkedFiles, filesToCheck);
@@ -144,9 +148,10 @@ public class ClientLaunchController extends Controller {
             {
                 Platform.runLater(() -> {
                     status.setText("Can't get script "+scriptFile+" data ");
-                    checkedFiles.getAndIncrement();
                 });
             }
+
+            checkedFiles.getAndIncrement();
 
 //            if(!checkFileHash(scriptFile, PublicInstance.getInstance().getScripts().getData().))
         }
@@ -154,11 +159,12 @@ public class ClientLaunchController extends Controller {
 
     private void checkHashesOrDownload(String[] object, JSONObject j, String root, String sub, AtomicInteger checkedFiles, int filesToCheck)
     {
-
         for (String filePath : object)
         {
             if(aborted)
                 return;
+
+            DiscordRichPresence.getInstance().updateState("Launching... [" + checkedFiles.get() + "/" + filesToCheck + "]");
 
             File file = new File(root, sub + "\\" + filePath);
             Platform.runLater(() -> {status.setText("Checking hash for " + file.getName());});

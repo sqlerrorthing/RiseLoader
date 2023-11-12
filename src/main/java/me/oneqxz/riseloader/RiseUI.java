@@ -9,6 +9,7 @@ import me.oneqxz.riseloader.fxml.components.impl.EluaAccept;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.components.impl.Loading;
 import me.oneqxz.riseloader.fxml.components.impl.Updater;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.ClientInfo;
 import me.oneqxz.riseloader.rise.RiseInfo;
@@ -60,6 +61,10 @@ public class RiseUI extends Application {
         {
             log.info("Detected OS: " + OSUtils.getOS().name());
         }
+
+        loading.setStageText("Initializing DiscordRPC");
+        DiscordRichPresence.getInstance();
+        loading.setStageText("DiscordRPC ready");
 
         Thread thread = new Thread(() ->
         {
@@ -162,6 +167,11 @@ public class RiseUI extends Application {
     }
 
     public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() ->
+        {
+            if(DiscordRichPresence.isRegistered())
+                DiscordRichPresence.getInstance().shutdown();
+        }));
         launch();
     }
 }

@@ -16,6 +16,7 @@ import me.oneqxz.riseloader.fxml.controllers.impl.MainController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.HomeController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.ScriptsController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.SettingsController;
+import me.oneqxz.riseloader.fxml.rpc.DiscordRichPresence;
 
 import java.io.IOException;
 
@@ -61,16 +62,19 @@ public class MainScene {
             switch (page) {
                 case HOME ->
                 {
+                    DiscordRichPresence.getInstance().updateState("In Home page");
                     home.getStyleClass().add("navButtonActive");
                     pageParent = homeNode == null ? homeNode = FX.createNewParent("pages/home.fxml", new HomeController(), null) : homeNode;
                 }
                 case SETTINGS ->
                 {
+                    DiscordRichPresence.getInstance().updateState("In Settings page");
                     settings.getStyleClass().add("navButtonActive");
                     pageParent = settingsNode == null ? settingsNode = FX.createNewParent("pages/settings.fxml", new SettingsController(), null) : settingsNode;
                 }
                 case SCRIPTS ->
                 {
+                    DiscordRichPresence.getInstance().updateState("In Scripts page");
                     scrips.getStyleClass().add("navButtonActive");
                     pageParent = scriptsNode == null ? scriptsNode = FX.createNewParent("pages/scripts.fxml", new ScriptsController(), null) : scriptsNode;
                 }
