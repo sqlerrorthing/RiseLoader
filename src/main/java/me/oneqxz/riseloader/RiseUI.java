@@ -2,6 +2,9 @@ package me.oneqxz.riseloader;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import me.oneqxz.riseloader.elua.Elua;
@@ -14,6 +17,7 @@ import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.ClientInfo;
 import me.oneqxz.riseloader.rise.RiseInfo;
 import me.oneqxz.riseloader.rise.pub.PublicInstance;
+import me.oneqxz.riseloader.rise.startup.IStartCommand;
 import me.oneqxz.riseloader.rise.versions.PublicBeta;
 import me.oneqxz.riseloader.rise.versions.Release;
 import me.oneqxz.riseloader.settings.Settings;
@@ -23,15 +27,18 @@ import me.oneqxz.riseloader.utils.requests.Requests;
 import me.oneqxz.riseloader.utils.requests.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 
 public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
-    public static final Version version = new Version("1.0.6");
+    public static final Version version = new Version("1.0.7");
     public static final String serverIp = "http://riseloader.0x22.xyz";
+    public static final SimpleObjectProperty<Image> backgroundImage = new SimpleObjectProperty<Image>();
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -47,6 +54,7 @@ public class RiseUI extends Application {
 
     private void load(Stage stage) throws IOException
     {
+        loadBackgroundImage();
         Loading loading = new Loading();
         Stage loadingStage = loading.show(true);
 
@@ -118,6 +126,7 @@ public class RiseUI extends Application {
                         catch (Exception e)
                         {
                             new ErrorBox().show(e);
+                            loadingStage.close();
                             e.printStackTrace();
                         }
                     }
@@ -133,7 +142,10 @@ public class RiseUI extends Application {
                             files.getJSONObject("natives"),
                             files.getJSONObject("java"),
                             files.getJSONObject("rise"),
-                            new ClientInfo(publicBeta, release, client.getString("release_changelog"), client.getString("loader_version"))
+                            new ClientInfo(publicBeta, release, client.getString("release_changelog"), client.getString("loader_version")),
+                            client.getString("discord_invite"),
+                            () -> {return client.getJSONObject("startup").getString("normal");},
+                            () -> {return client.getJSONObject("startup").getString("optimized");}
                     );
 
                     loading.setStageTextLater("Finalizing...");
@@ -164,6 +176,20 @@ public class RiseUI extends Application {
             }
         });
         thread.start();
+    }
+
+    private static void loadBackgroundImage()
+    {
+        String customImage = Settings.getSettings().getString("personalization.background", null);
+        Image image = null;
+
+        if(customImage == null || !new File(OSUtils.getRiseFolder().toFile(), ".config\\" + customImage).exists() || new Image("file:///" + new File(OSUtils.getRiseFolder().toFile(), ".config\\" + customImage)).isError())
+            image = new Image("/background.jpg");
+        else
+            image = new Image("file:///" + new File(OSUtils.getRiseFolder().toFile(), ".config\\" + customImage));
+
+        backgroundImage.setValue(image);
+
     }
 
     public static void main(String[] args) {

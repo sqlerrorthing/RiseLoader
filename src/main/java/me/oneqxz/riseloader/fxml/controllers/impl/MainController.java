@@ -6,13 +6,17 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import me.oneqxz.riseloader.RiseUI;
+import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
 import me.oneqxz.riseloader.rise.RiseInfo;
 
+import java.awt.*;
+import java.net.URI;
+
 public class MainController extends Controller {
 
-    Button home, settings, scripts;
+    Button home, settings, scripts, discord, github;
     Text version, riseVersion;
     Rectangle background;
 
@@ -21,6 +25,9 @@ public class MainController extends Controller {
         this.home = ((Button) root.lookup("#btnHome"));
         this.settings = ((Button) root.lookup("#btnSettings"));
         this.scripts = ((Button) root.lookup("#btnScripts"));
+
+        this.discord = ((Button) root.lookup("#discord"));
+        this.github = ((Button) root.lookup("#github"));
 
         this.background = ((Rectangle) root.lookup("#background"));
 
@@ -41,8 +48,31 @@ public class MainController extends Controller {
             MainScene.setCurrenViewPage(MainScene.Page.SCRIPTS);
         });
 
-        Image bg = new Image("/background.jpg");
-        background.setFill(new ImagePattern(bg));
+        this.discord.setOnMouseClicked(event ->
+        {
+            try
+            {
+                Desktop.getDesktop().browse(new URI("https://discord.com/invite/" + RiseInfo.getInstance().getDiscordInvite()));
+            }
+            catch (Exception e)
+            {
+                new ErrorBox().show(e);
+            }
+        });
+
+        this.github.setOnMouseClicked(event ->
+        {
+            try
+            {
+                Desktop.getDesktop().browse(new URI("https://github.com/oneqxz/RiseLoader"));
+            }
+            catch (Exception e)
+            {
+                new ErrorBox().show(e);
+            }
+        });
+
+        MainScene.setBackground(background);
 
         this.version.setText("Loader: " + RiseUI.version.getVersion());
     }

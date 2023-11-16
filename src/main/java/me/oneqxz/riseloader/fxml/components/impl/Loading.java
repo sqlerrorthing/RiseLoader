@@ -6,9 +6,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.components.Component;
 import me.oneqxz.riseloader.fxml.FX;
 import me.oneqxz.riseloader.fxml.controllers.Controller;
+import me.oneqxz.riseloader.fxml.scenes.MainScene;
 
 import java.io.IOException;
 
@@ -22,8 +24,7 @@ public class Loading extends Component {
         FX.showScene("RiseLoader loading", "loading.fxml", stage, new Controller() {
             @Override
             protected void init() {
-                Image bg = new Image("/background.jpg");
-                ((Rectangle)root.lookup("#background")).setFill(new ImagePattern(bg));
+                MainScene.setBackground(((Rectangle)root.lookup("#background")));
             }
         });
         FX.setMinimizeAndClose(stage, "minimizeBtn", "closeBtn", (boolean) args[0]);

@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
@@ -20,14 +22,14 @@
       <URL value="@../css/settings.css" />
    </stylesheets>
    <children>
-      <Pane prefHeight="382.0" prefWidth="362.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
+      <Pane fx:id="settingsPane" prefHeight="301.0" prefWidth="362.0" style="-fx-background-color: rgba(0, 0, 0, 0.2); -fx-background-radius: 6;">
          <children>
             <Text fill="WHITE" layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETTINGS">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
             </Text>
-            <VBox layoutX="14.0" layoutY="47.0" prefHeight="321.0" prefWidth="351.0">
+            <VBox layoutX="14.0" layoutY="47.0" prefHeight="254.0" prefWidth="351.0">
                <children>
                   <Pane prefHeight="82.0" prefWidth="351.0">
                      <children>
@@ -77,7 +79,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Pane>
-                  <Pane prefHeight="89.0" prefWidth="351.0">
+                  <Pane prefHeight="45.0" prefWidth="351.0">
                      <children>
                         <CheckBox fx:id="javaoptimize" layoutX="1.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Optimizing java" textFill="#cdcbcb">
                            <font>
@@ -144,5 +146,20 @@
             </VBox>
          </children>
       </Pane>
+      <Pane fx:id="personalizationToggle" layoutY="307.0" prefHeight="75.0" prefWidth="362.0">
+         <children>
+            <ImageView fx:id="personalizationToggleImage" fitHeight="48.0" fitWidth="43.0" layoutX="160.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="data:image/png;base64,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" />
+               </image>
+            </ImageView>
+            <Text fx:id="togglerText" fill="WHITE" layoutX="83.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONALIZATION" textAlignment="CENTER" wrappingWidth="196.60888671875">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane fx:id="personalizationPane" layoutY="381.0" prefHeight="1.0" prefWidth="362.0" visible="false" />
    </children>
 </AnchorPane>

@@ -12,11 +12,7 @@ public class DiscordRichPresence {
     private DiscordRichPresence()
     {
         updateState("Initialization");
-        DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler((user) -> {
-
-        }).build();
-
-        DiscordRPC.discordInitialize("1173162604055773184", handlers, true);
+        DiscordRPC.discordInitialize("1173162604055773184", null, true);
 
         net.arikia.dev.drpc.DiscordRichPresence drpc = new net.arikia.dev.drpc.DiscordRichPresence.Builder("RiseLoader v" + RiseUI.version.getVersion())
                 .setBigImage("logo", "RiseLoader v" + RiseUI.version.getVersion())

@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import me.oneqxz.riseloader.fxml.components.impl.ErrorBox;
 import me.oneqxz.riseloader.fxml.components.impl.LaunchDebug;
 import me.oneqxz.riseloader.fxml.scenes.MainScene;
+import me.oneqxz.riseloader.rise.RiseInfo;
 import me.oneqxz.riseloader.settings.Settings;
 import me.oneqxz.riseloader.utils.OSUtils;
 import org.apache.logging.log4j.LogManager;
@@ -20,9 +21,6 @@ public class RunClient {
 
     public static void run(Node launchNode)
     {
-        String mainClass = "net.minecraft.client.main.Main";
-
-
         String osNatives = OSUtils.getOS() == OSUtils.OS.WINDOWS ? "windows" : "linux";
         File rootFolder = OSUtils.getRiseFolder().toFile();
 
@@ -55,69 +53,18 @@ public class RunClient {
             }
             classpath.append("\"");
 
-            List<String> command = new ArrayList<>();
-            command.add(rootFolder.getAbsolutePath() + "\\java\\" + OSUtils.getOS().name().toLowerCase() + "\\bin\\java" + (OSUtils.getOS() == OSUtils.OS.WINDOWS ? ".exe" : ""));
-            command.add("-noverify");
-            command.add("-Xmx" + Settings.getSettings().getInt("preferences.memory") + "M");
-            command.add("-Xms" + Settings.getSettings().getInt("preferences.memory") + "M");
-            command.add("-Djava.library.path=" + rootFolder.getAbsolutePath() + "\\natives\\" + osNatives);
-            command.add("-Dfile.encoding=UTF-8");
-            command.add("-Dsun.stdout.encoding=UTF-8");
+            String startCommand = Settings.getSettings().getBoolean("others.javaoptimize", true) ? RiseInfo.getInstance().getOptimizedStartupCommand().getCommand() : RiseInfo.getInstance().getNormalStartupCommand().getCommand();
+            startCommand = startCommand.replace("{JAVA}", rootFolder.getAbsolutePath() + "\\java\\" + OSUtils.getOS().name().toLowerCase() + "\\bin\\java" + (OSUtils.getOS() == OSUtils.OS.WINDOWS ? ".exe" : ""));
+            startCommand = startCommand.replace("{MEMORY}", Settings.getSettings().getInt("preferences.memory") + "M");
+            startCommand = startCommand.replace("{NATIVES}", rootFolder.getAbsolutePath() + "\\natives\\" + osNatives);
+            startCommand = startCommand.replace("{CP}", classpath.toString());
+            startCommand = startCommand.replace("{UUID}", UUID.randomUUID().toString());
+            startCommand = startCommand.replace("{USERNAME}", "R" + new Random().nextInt(99999));
+            startCommand = startCommand.replace("{SCREEN_RESOLUTION}", (Settings.getSettings().getBoolean("preferences.resolution.fullscreen", false)) ? "-fullscreen" : "-width " + String.valueOf(Settings.getSettings().getInt("preferences.resolution.width", 854)) + " -height " + String.valueOf(Settings.getSettings().getInt("preferences.resolution.height", 480)));
+            startCommand = startCommand.replace("{SYS_TIME}", String.valueOf(System.currentTimeMillis()));
+            startCommand = startCommand.replace("{FOLDER]", OSUtils.getRiseFolder().toFile().getAbsolutePath());
 
-
-            if(Settings.getSettings().getBoolean("others.javaoptimize", true))
-            {
-                command.add("-XX:+DisableAttachMechanism");
-                command.add("-XX:+UseG1GC");
-                command.add("-XX:+DisableExplicitGC");
-                command.add("-XX:+UseNUMA");
-                command.add("-XX:MaxTenuringThreshold=15");
-                command.add("-XX:MaxGCPauseMillis=30");
-                command.add("-XX:GCPauseIntervalMillis=150");
-                command.add("-XX:-UseGCOverheadLimit");
-                command.add("-XX:SurvivorRatio=8");
-                command.add("-XX:TargetSurvivorRatio=90");
-                command.add("-XX:MaxTenuringThreshold=15");
-                command.add("-Dfml.ignorePatchDiscrepancies=true");
-                command.add("-Dfml.ignoreInvalidMinecraftCertificates=true");
-                command.add("-XX:+UseCompressedOops");
-                command.add("-XX:+OptimizeStringConcat");
-                command.add("-XX:ReservedCodeCacheSize=2048m");
-                command.add("-XX:+UseCodeCacheFlushing");
-                command.add("-XX:SoftRefLRUPolicyMSPerMB=10000");
-                command.add("-XX:ParallelGCThreads=10");
-            }
-
-            command.add("-classpath");
-            command.add(classpath.toString());
-            command.add(mainClass);
-
-            command.add("-uuid");
-            command.add(UUID.randomUUID().toString());
-
-            command.add("-accessToken");
-            command.add("yes");
-
-            command.add("-version");
-            command.add("1");
-
-            command.add("-assetIndex");
-            command.add("1.8");
-
-            command.add("-username");
-            command.add("R" + new Random().nextInt(99999));
-
-            if(Settings.getSettings().getBoolean("preferences.resolution.fullscreen", false))
-                command.add("-fullscreen");
-            else
-            {
-                command.add("-width");
-                command.add(String.valueOf(Settings.getSettings().getInt("preferences.resolution.width", 854)));
-                command.add("-height");
-                command.add(String.valueOf(Settings.getSettings().getInt("preferences.resolution.height", 480)));
-            }
-
-            ProcessBuilder pb = new ProcessBuilder(command);
+            ProcessBuilder pb = new ProcessBuilder(startCommand.split(" "));
             pb.redirectErrorStream(true);
 
             File runDir = new File(rootFolder, "run");
@@ -141,7 +88,7 @@ public class RunClient {
             env.put("JAVA_OPTIONS", "");
 
             Process process = pb.start();
-            LaunchDebug launchDebug = new LaunchDebug(process);
+            LaunchDebug launchDebug = new LaunchDebug(process, startCommand);
 
             Runtime.getRuntime().addShutdownHook(new Thread(process::destroy));
             Platform.runLater(() ->

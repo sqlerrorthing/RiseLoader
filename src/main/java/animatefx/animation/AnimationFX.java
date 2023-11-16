@@ -199,8 +199,9 @@ public abstract class AnimationFX {
      *
      * @param value
      */
-    public final void setOnFinished(EventHandler<ActionEvent> value) {
+    public final AnimationFX setOnFinished(EventHandler<ActionEvent> value) {
         this.timeline.setOnFinished(value);
+        return this;
     }
 
 }

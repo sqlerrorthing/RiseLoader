@@ -13,7 +13,6 @@ module me.oneqxz.riseloader {
     requires java.management;
     requires org.apache.commons.io;
     requires org.apache.commons.compress;
-    requires net.hycrafthd.minecraft_authenticator;
     requires javafx.media;
     requires discord.rpc;
 

@@ -19,12 +19,14 @@ import java.io.*;
 public class LaunchDebugController extends Controller {
 
     private Process process;
+    private String command;
     private TextArea logs;
 
     private Button closeExitButton, copy;
 
-    public LaunchDebugController(Process process) {
+    public LaunchDebugController(Process process, String command) {
         this.process = process;
+        this.command = command;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class LaunchDebugController extends Controller {
         this.closeExitButton = (Button) root.lookup("#closeExitButton");
         this.copy = (Button) root.lookup("#copyButton");
 
-        ((Rectangle) root.lookup("#background")).setFill(new ImagePattern(new Image("/background.jpg")));
+        MainScene.setBackground(((Rectangle)root.lookup("#background")));
 
         BufferedReader stdoutReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader stderrReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
@@ -61,6 +63,8 @@ public class LaunchDebugController extends Controller {
                 stage.close();
             }
         });
+
+        logs.appendText(command + "\n");
 
         new Thread(() ->
         {

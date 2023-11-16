@@ -1,17 +1,19 @@
 package me.oneqxz.riseloader.fxml.scenes;
 
-import animatefx.animation.*;
 import javafx.application.Platform;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import me.oneqxz.riseloader.RiseUI;
 import me.oneqxz.riseloader.fxml.FX;
 import me.oneqxz.riseloader.fxml.animations.CFadeInLeft;
+import me.oneqxz.riseloader.fxml.animations.CFadeOutRight;
 import me.oneqxz.riseloader.fxml.controllers.impl.MainController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.HomeController;
 import me.oneqxz.riseloader.fxml.controllers.impl.viewpage.ScriptsController;
@@ -36,6 +38,10 @@ public class MainScene {
         setCurrenViewPage(Page.HOME);
     }
 
+    public static Stage getStage() {
+        return stage;
+    }
+
     private static Node homeNode, settingsNode, scriptsNode;
     private static Page currentViewPage;
 
@@ -51,6 +57,7 @@ public class MainScene {
         Button scrips = ((Button) scene.getRoot().lookup("#btnScripts"));
 
         Pane pageContent = ((Pane) scene.getRoot().lookup("#pageContent"));
+        VBox navVBOX = (VBox) scene.getRoot().lookup("#navVBOX");
 
         home.getStyleClass().remove("navButtonActive");
         settings.getStyleClass().remove("navButtonActive");
@@ -85,10 +92,28 @@ public class MainScene {
             e.printStackTrace();
         }
 
-        pageContent.getChildren().clear();
+        if(!pageContent.getChildren().isEmpty())
+        {
+            Node last = pageContent.getChildren().get(0);
+            pageContent.getChildren().add(pageParent);
+            new CFadeInLeft(pageParent).setSpeed(2).play();
 
-        new CFadeInLeft(pageParent).setSpeed(2).play();
-        pageContent.getChildren().add(pageParent);
+            pageContent.setMouseTransparent(true);
+            navVBOX.setMouseTransparent(true);
+
+            new CFadeOutRight(last).setSpeed(3).setOnFinished(s ->
+            {
+                pageContent.setMouseTransparent(false);
+                navVBOX.setMouseTransparent(false);
+                pageContent.getChildren().remove(last);
+            }).play();
+        }
+        else
+        {
+            pageContent.getChildren().add(pageParent);
+            new CFadeInLeft(pageParent).setSpeed(3).play();
+        }
+
         System.gc();
     }
 
@@ -115,6 +140,19 @@ public class MainScene {
     public static void closeSelf()
     {
         Platform.runLater(() -> stage.close());
+    }
+
+    public static void setBackground(Rectangle rectangle)
+    {
+        RiseUI.backgroundImage.addListener((observable, oldValue, newValue) ->
+        {
+            Image bg = RiseUI.backgroundImage.get();
+            rectangle.setFill(new ImagePattern(bg));
+        });
+
+        Image bg = RiseUI.backgroundImage.get();
+
+        rectangle.setFill(new ImagePattern(bg));
     }
 
     public static enum Page {

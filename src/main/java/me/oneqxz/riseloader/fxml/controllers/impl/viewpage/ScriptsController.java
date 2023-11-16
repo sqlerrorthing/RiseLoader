@@ -1,6 +1,7 @@
 package me.oneqxz.riseloader.fxml.controllers.impl.viewpage;
 
 import animatefx.animation.FadeIn;
+import animatefx.animation.FadeOut;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Node;
@@ -394,8 +395,28 @@ public class ScriptsController extends Controller {
                 boolean flag2 = flag1 || scriptData.getDescription().toLowerCase().replace("\n", "").replace(" ", "").contains(newValue.toLowerCase().replace(" ", ""));
                 boolean flag3 = flag2 || scriptData.getServers().toLowerCase().replace("\n", "").replace(" ", "").contains(newValue.toLowerCase().replace(" ", ""));
 
-                this.root.setVisible(newValue.isEmpty() || flag3);
-                this.root.setManaged(newValue.isEmpty() || flag3);
+                if((newValue.isEmpty() || flag3))
+                {
+                    if(!this.root.isVisible())
+                    {
+                        new FadeIn(this.root).setOnFinished((e) ->
+                        {
+                            this.root.setVisible(true);
+                            this.root.setManaged(true);
+                        }).setSpeed(2).play();
+                    }
+                }
+                else
+                {
+                    if(this.root.isVisible())
+                    {
+                        new FadeOut(this.root).setOnFinished((e) ->
+                        {
+                            this.root.setVisible(false);
+                            this.root.setManaged(false);
+                        }).setSpeed(2).play();
+                    }
+                }
             });
 
             this.root.setOnMouseEntered((e) ->

@@ -11,15 +11,16 @@ import java.io.IOException;
 public class LaunchDebug extends Component {
 
     private Process process;
-
-    public LaunchDebug(Process process) {
+    private String command;
+    public LaunchDebug(Process process, String command) {
         this.process = process;
+        this.command = command;
     }
 
     @Override
     public Stage show(Object... args) throws IOException {
         Stage stage = new Stage();
-        FX.showScene("RiseLoader debug", "started.fxml", stage, new LaunchDebugController(process));
+        FX.showScene("RiseLoader debug", "started.fxml", stage, new LaunchDebugController(process, command));
         FX.setMinimizeAndClose(stage, "hideButton", "closeButton", () ->
         {
             process.destroy();

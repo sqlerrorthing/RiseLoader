@@ -22,6 +22,15 @@ public class OSUtils {
         return Path.of(System.getProperty("user.home"), ".rise");
     }
 
+    public static String getFileExtension(Path path) {
+        String fileName = path.getFileName().toString();
+        int index = fileName.lastIndexOf('.');
+        if (index > 0 && index < fileName.length() - 1) {
+            return fileName.substring(index);
+        }
+        return "";
+    }
+
     public enum OS {
         WINDOWS,
         LINUX,

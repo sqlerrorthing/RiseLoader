@@ -41,7 +41,7 @@ public class Settings {
         setDefault("others.javaoptimize", true);
 
         setDefault("rise.scripts.enabled", Arrays.stream(new String[]{"QuickPlay", "ItemUI", "NoJumpDelay", "BowTrajectories"}).toList());
-
+        setDefault("personalization.background", null);
         saveConfig();
     }
 
