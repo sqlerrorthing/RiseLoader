@@ -36,12 +36,13 @@ import java.io.IOException;
 public class RiseUI extends Application {
 
     private static final Logger log = LogManager.getLogger("RiseLoader");
-    public static final Version version = new Version("1.0.7");
+    public static final Version version = new Version("1.0.8");
     public static final String serverIp = "http://riseloader.0x22.xyz";
     public static final SimpleObjectProperty<Image> backgroundImage = new SimpleObjectProperty<Image>();
 
     @Override
     public void start(Stage stage) throws IOException {
+        loadBackgroundImage();
         if(!Elua.getElua().isEluaAccepted())
         {
             new EluaAccept(() -> {try{load(stage);}catch (Exception e){e.printStackTrace();System.exit(0);}}).show();
@@ -54,7 +55,6 @@ public class RiseUI extends Application {
 
     private void load(Stage stage) throws IOException
     {
-        loadBackgroundImage();
         Loading loading = new Loading();
         Stage loadingStage = loading.show(true);
 
